@@ -92,7 +92,7 @@ public class Main {
         System.out.println("frog = " + frog);
 
         System.out.println();
-
+        
     }
 
 /*  Задача 6
