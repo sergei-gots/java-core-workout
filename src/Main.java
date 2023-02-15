@@ -1,6 +1,11 @@
 public class Main {
     public static void main(String[] args) {
 
+        homework1();
+    }
+
+    public static void homework1() {
+
         System.out.println("Homework # 1");
 
             task1_3();
@@ -92,7 +97,7 @@ public class Main {
         System.out.println("frog = " + frog);
 
         System.out.println();
-        
+
     }
 
 /*  Задача 6
@@ -167,5 +172,6 @@ public class Main {
 
         System.out.println();
     }
+
 
 }
