@@ -1,6 +1,11 @@
 public class Main {
     public static void main(String[] args) {
 
+        homework1();
+    }
+
+    public static void homework1() {
+
         System.out.println("Homework # 1");
 
             task1_3();
