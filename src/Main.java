@@ -86,7 +86,7 @@ public class Main {
         int daysMin = diffTotal / diffMaxPerDay;
         int daysMax = diffTotal / diffMinPerDay;
 
-        int daysAverage = (daysMin + daysMax) / 2;
+        int daysAverage = diffTotal / ((diffMaxPerDay + diffMinPerDay) / 2);
 
         System.out.println("Количество дней для достижения результата: ");
         System.out.println("\t минимум - " + daysMin + " дней;");
