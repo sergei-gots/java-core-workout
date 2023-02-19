@@ -9,6 +9,8 @@ public class Hw_5 {
         task3();
         task4();
         task5();
+
+        System.out.println();
     }
 
     /* Задача 5
