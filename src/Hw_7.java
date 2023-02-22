@@ -19,20 +19,20 @@ public class Hw_7 {
     }
 
     /*
-        Задача 8
-            Нам нужно написать астрономическое приложение, которое считает, когда над Землей пролетает комета.
-                Известно, что комета пролетает каждый 79-й год, начиная с нулевого.
-                В консоль нужно вывести все годы за последние 200 лет, когда появлялась комета,
-            а также следующий год ее появления (ближайшие 100 лет).
-                Для вычисления периода можно создать две дополнительные переменные,
-            которые содержат год за 200 лет до текущего (из созданной ранее переменной)
-            в качестве старта и 100 лет после в качестве завершения периода расчета.
-            В результате решения задачи в консоли должен получиться следующий результат:
+          Задача 8
+              Нам нужно написать астрономическое приложение, которое считает, когда над Землей пролетает комета.
+                  Известно, что комета пролетает каждый 79-й год, начиная с нулевого.
+                  В консоль нужно вывести все годы за последние 200 лет, когда появлялась комета,
+              а также следующий год ее появления (ближайшие 100 лет).
+                  Для вычисления периода можно создать две дополнительные переменные,
+              которые содержат год за 200 лет до текущего (из созданной ранее переменной)
+              в качестве старта и 100 лет после в качестве завершения периода расчета.
+              В результате решения задачи в консоли должен получиться следующий результат:
 
-                1896
-                1975
-                2054
-     */
+                  1896
+                  1975
+                  2054
+       */
     private static void task8() {
         System.out.println("Task 8");
 
@@ -40,17 +40,17 @@ public class Hw_7 {
         int firstYearUnderView = currentYear - 200;
         int lastYearUnderView = currentYear + 100;
 
-        final int COMET_PERIOD = 79;
+        final int cometPeriod = 79;
         int firstAppearanceAD = 0;
 
         int appearanceWithinPeriodUnderView =
-                firstYearUnderView + COMET_PERIOD -
+                firstYearUnderView + cometPeriod -
                         (firstYearUnderView - firstAppearanceAD -
-                                ((firstYearUnderView - firstAppearanceAD) / COMET_PERIOD) * COMET_PERIOD);
+                                ((firstYearUnderView - firstAppearanceAD) / cometPeriod) * cometPeriod);
 
         while (appearanceWithinPeriodUnderView <= lastYearUnderView) {
             System.out.println(appearanceWithinPeriodUnderView);
-            appearanceWithinPeriodUnderView += COMET_PERIOD;
+            appearanceWithinPeriodUnderView += cometPeriod;
         }
 
         System.out.println();
@@ -70,14 +70,14 @@ public class Hw_7 {
     private static void task7() {
         System.out.println("Task 7");
 
-        final int DAYS_IN_WEEK = 7;
+        final int daysInWeek = 7;
         int dateOfFriday = 3;
         int daysInMonth = 31;
 
 
         while (dateOfFriday <= daysInMonth) {
             System.out.println("Сегодня пятница, " + dateOfFriday + "-е число. Необходимо подготовить отчёт.");
-            dateOfFriday += DAYS_IN_WEEK;
+            dateOfFriday += daysInWeek;
         }
 
         System.out.println();
@@ -94,9 +94,9 @@ public class Hw_7 {
 
         final double depositInterest = 1.07;
 
-        final int MONTHS_IN_YEAR = 12;
+        final int monthsInYear = 12;
         final int yearsAmount = 9;
-        final int monthsTotal = yearsAmount * MONTHS_IN_YEAR;
+        final int monthsTotal = yearsAmount * monthsInYear;
 
         double amount = 15_000;
         int monthsCount = 0;
@@ -118,11 +118,11 @@ public class Hw_7 {
         Видоизмените программу таким образом, чтобы в консоль выводились не все месяцы подряд,
         а только каждый шестой. Должны быть видны накопления за 6, 12, 18, 24-й и следующие месяцы.
      */
-    private static boolean task5Flag = false;
+    private static boolean reportMonthly = true;
 
     private static void task5() {
-        task5Flag = true;
-        task4_5();
+        reportMonthly = true;
+        tasks4_5();
     }
 
     /* Задача 4.
@@ -138,29 +138,27 @@ public class Hw_7 {
         а только каждый шестой. Должны быть видны накопления за 6, 12, 18, 24-й и следующие месяцы.
     * */
     private static void task4() {
-        task5Flag = false;
-        task4_5();
+
+        System.out.println("Task 4");
+        reportMonthly = false;
+        tasks4_5();
     }
 
-    private static void task4_5() {
+    private static void tasks4_5() {
 
-        if (!task5Flag) {
-            System.out.println("Task 4");
-        } else {
-            System.out.println("Task 5");
-        }
-
+        final double initialAmount = 15_000;
         final double depositInterest = 1.07;
         final double targetAmount = 12_000_000;
 
-        double amount = 15_000;
+
+        double amount = initialAmount;
         int monthsCount = 0;
 
         NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.FRANCE);
 
         while (amount < targetAmount) {
             amount *= depositInterest;
-            if ((++monthsCount % 6 == 0) || !task5Flag)
+            if ((++monthsCount % 6 == 0) || reportMonthly)
                 System.out.println("Месяц " + monthsCount +
                         ", сумма накоплений равна " + numberFormat.format(amount) + " рублей.");
         }
@@ -237,15 +235,15 @@ public class Hw_7 {
         System.out.println("Task 1");
 
         int total = 0;
-        int i = 0;
+        int monthsCount = 0;
 
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.FRANCE);
 
         while (total < 2_459_000) {
             total += 15_000;
-            i++;
+            monthsCount++;
 
-            System.out.println("Месяц " + i +
+            System.out.println("Месяц " + monthsCount +
                     ", сумма накоплений равна " + numberFormat.format(total) + " рублей.");
         }
 

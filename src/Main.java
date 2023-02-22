@@ -7,7 +7,9 @@ public class Main {
         HW_4,
         HW_5,
         HW_6,
-        HW_7
+        HW_7,
+        HW_8,
+        HW_9
     }
     public static void main(String[] args) {
 
@@ -23,6 +25,8 @@ public class Main {
             case HW_5: Hw_5.homework5(); break;
             case HW_6: Hw_6.homework6(); break;
             case HW_7: Hw_7.homework7(); break;
+            case HW_8: Hw_8.homework8(); break;
+            case HW_9: Hw_9.homework9(); break;
 
         }
     }
