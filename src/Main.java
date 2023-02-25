@@ -13,7 +13,7 @@ public class Main {
     }
     public static void main(String[] args) {
 
-        HW_NUMBER hwNumber = HW_NUMBER.HW_7;
+        HW_NUMBER hwNumber = HW_NUMBER.HW_9;
 
         switch(hwNumber) {
             case HW_1:

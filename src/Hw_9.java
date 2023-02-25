@@ -35,8 +35,15 @@ public class Hw_9 {
 
         char[] reverseFullName = {'n', 'a', 'v', 'I', ' ', 'v', 'o', 'n', 'a', 'v', 'I'};
 
-        for (int i = reverseFullName.length - 1; i >= 0; i--) {
-            System.out.print(reverseFullName[i]);
+        for (int i = 0; i < reverseFullName.length/2; i++) {
+            char buff = reverseFullName[i];
+            reverseFullName[i] = reverseFullName[reverseFullName.length - i - 1];
+            reverseFullName[reverseFullName.length - i - 1] = buff;
+        }
+
+        for (char ch :
+                reverseFullName) {
+            System.out.print(ch);
         }
 
         System.out.println("\n");
@@ -86,16 +93,10 @@ public class Hw_9 {
             }
         }
 
-        if (min == Integer.MIN_VALUE || max == Integer.MAX_VALUE) {
-            System.out.println("Недостаточно данных для вычисления максимальной и минимальной сумм трат за день.");
-        } else {
-            System.out.println("Минимальная сумма трат за день составила " + numberFormat.format(min) + " рублей.");
-            System.out.println("Максимальная сумма трат за день составила " + numberFormat.format(max) + " рублей.");
-        }
+        System.out.println("Минимальная сумма трат за день составила " + numberFormat.format(min) + " рублей.");
+        System.out.println("Максимальная сумма трат за день составила " + numberFormat.format(max) + " рублей.");
 
         System.out.println();
-
-        String str = new String();
     }
 
     /* Задача 1
