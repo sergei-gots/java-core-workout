@@ -1,6 +1,6 @@
-public class Hw_5 {
+public class Hw_5 implements Homework {
 
-    public static void homework5() {
+    public void homework() {
 
         System.out.println("Homework #1.5\n");
 

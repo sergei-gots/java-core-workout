@@ -1,8 +1,8 @@
 import java.util.Locale;
 
-public class Hw_6 {
+public class Hw_6 implements Homework {
 
-    public static void homework6() {
+    public void homework() {
 
         System.out.println("Homework #1.6\n");
 

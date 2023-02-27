@@ -1,7 +1,8 @@
 import java.util.Arrays;
 
-public class Hw_8 {
-    public static void homework8() {
+public class Hw_8  implements Homework {
+
+    public void homework() {
         System.out.println("Homework 1.8. Arrays");
 
         boolean isHomework = true;

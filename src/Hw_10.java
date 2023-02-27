@@ -1,5 +1,6 @@
-public class Hw_10 {
-    public static void homework10() {
+public class Hw_10  implements Homework {
+
+    public void homework() {
 
         System.out.println("Homework 1.10 \"Class String\"");
 

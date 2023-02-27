@@ -1,8 +1,9 @@
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Hw_7 {
-    public static void homework7() {
+public class Hw_7  implements Homework {
+
+    public void homework() {
 
         System.out.println("Homework #1.7\n");
 

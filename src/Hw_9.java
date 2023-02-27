@@ -2,10 +2,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Random;
 
-public class Hw_9 {
+public class Hw_9 implements Homework {
+
     private final static int DAYS_IN_MONTH = 30;
 
-    public static void homework9() {
+    public void homework() {
 
         System.out.println("Homework 1.9. Arrays (part 2)");
 
