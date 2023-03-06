@@ -1,3 +1,7 @@
+package pro.sky.java.course1;
+
+import pro.sky.java.util.Homework;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Random;

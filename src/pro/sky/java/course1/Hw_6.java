@@ -1,3 +1,7 @@
+package pro.sky.java.course1;
+
+import pro.sky.java.util.Homework;
+
 import java.util.Locale;
 
 public class Hw_6 implements Homework {

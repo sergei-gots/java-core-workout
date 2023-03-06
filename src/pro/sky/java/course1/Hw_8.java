@@ -1,3 +1,7 @@
+package pro.sky.java.course1;
+
+import pro.sky.java.util.Homework;
+
 import java.util.Arrays;
 
 public class Hw_8  implements Homework {

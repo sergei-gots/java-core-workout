@@ -1,3 +1,7 @@
+package pro.sky.java.course1;
+
+import pro.sky.java.util.Homework;
+
 public class Hw_5 implements Homework {
 
     public void homework() {

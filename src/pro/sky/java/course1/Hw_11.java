@@ -1,15 +1,13 @@
+package pro.sky.java.course1;
+
+import pro.sky.java.util.Homework;
+
 import java.time.LocalDate;
 
-public class Hw_11 implements Homework{
-
-    public void homework() {
-        System.out.println("HW 1.11. \"Methods\".");
-
-        task1();
-        task2();
-        task3();
-
-        System.out.println();
+public class Hw_11 implements Homework {
+    enum OS {
+        IOS,
+        ANDROID
     }
 
     /**
@@ -23,20 +21,16 @@ public class Hw_11 implements Homework{
             try {
                 int time = calculateDeliveryTime(distance);
                 printShippingDetails(distance, time);
-            } catch (RuntimeException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private static void printShippingDetails(int distance, int time) {
+    private static void printShippingDetails(int distance, int days) {
         System.out.print("Дистанция до получателя составляет " + distance + " км. ");
-        System.out.print("Доставка займёт ");
-        if (time < 2) {
-            System.out.println("сутки.");
-        } else {
-            System.out.println(time + " суток.");
-        }
+        System.out.print("Доставка займёт "
+                + ((days < 2) ? "сутки." : days + " суток.") + '\n') ;
     }
 
     /**
@@ -52,23 +46,22 @@ public class Hw_11 implements Homework{
      * То есть с каждым следующим интервалом доставки срок увеличивается на 1 день.
      * <p>
      * Напишите программу, которая выдает сообщение в консоль: "Потребуется дней: " + срок доставки.
-     * Объявите целочисленную переменную deliveryDistance = 95, которая содержит дистанцию до клиента.
+     * Объявите целочисленную переменную deliveryDistanceKm = 95, которая содержит дистанцию до клиента.
      */
-    private static int calculateDeliveryTime(int deliveryDistance) throws RuntimeException {
+    private static int calculateDeliveryTime(int deliveryDistanceKm) {
 
-        if (deliveryDistance < 0) {
-            throw new RuntimeException("Для дистанции до клиента задано некорректное значение: " + deliveryDistance);
-        } else if (deliveryDistance < 20) {
+        if (deliveryDistanceKm < 0) {
+            throw new IllegalArgumentException("Для дистанции до клиента задано некорректное значение: " + deliveryDistanceKm);
+        } else if (deliveryDistanceKm < 20) {
             return 1;
-        } else if (deliveryDistance < 60) {
+        } else if (deliveryDistanceKm < 60) {
             return 2;
-        } else if (deliveryDistance <= 100) {
+        } else if (deliveryDistanceKm <= 100) {
             return 3;
         }
 
-        throw new RuntimeException("К сожалению, на дистанцию свыше 100 км доставка не предусмотрена.");
+        throw new IllegalArgumentException("К сожалению, на дистанцию свыше 100 км доставка не предусмотрена.");
     }
-
 
     /**
      * Задача 2.
@@ -153,9 +146,14 @@ public class Hw_11 implements Homework{
         System.out.println(" является високосным.");
     }
 
-    private enum OS {
-        IOS,
-        ANDROID
+    public void homework() {
+        System.out.println("HW 1.11. \"Methods\".");
+
+        task1();
+        task2();
+        task3();
+
+        System.out.println();
     }
 
 }

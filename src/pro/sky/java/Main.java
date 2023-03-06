@@ -1,7 +1,16 @@
+package pro.sky.java;
+
+import pro.sky.java.course1.*;
+import pro.sky.java.util.Homework;
+
 public class Main {
 
 
     public static void main(String[] args) {
+
+        String s1 = "привет";
+        String s2 = "привет";
+        System.out.println(s1==s2);
 
         Homework[] hw = { null,
                 new Homework() {
