@@ -1,6 +1,7 @@
 package pro.sky.java;
 
 import pro.sky.java.course1.*;
+import pro.sky.java.course1.hw_12.Hw_12;
 import pro.sky.java.util.Homework;
 
 public class Main {
@@ -8,11 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String s1 = "привет";
-        String s2 = "привет";
-        System.out.println(s1==s2);
-
-        Homework[] hw = { null,
+        Homework[] hw = {null,
                 new Homework() {
                     @Override
                     public void homework() {
@@ -28,9 +25,11 @@ public class Main {
                 new Hw_8(),
                 new Hw_9(),
                 new Hw_10(),
-                new Hw_11()};
+                new Hw_11(),
+                new Hw_12()
+        };
 
-        int hwNumber = 11;
+        int hwNumber = 12;
         hw[hwNumber].homework();
     }
 }

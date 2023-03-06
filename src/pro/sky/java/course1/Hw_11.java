@@ -146,6 +146,7 @@ public class Hw_11 implements Homework {
         System.out.println(" является високосным.");
     }
 
+    @Override
     public void homework() {
         System.out.println("HW 1.11. \"Methods\".");
 
