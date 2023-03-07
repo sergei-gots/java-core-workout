@@ -6,8 +6,15 @@ public class Book {
     private int year;
 
     public Book(String title, Author author, int year) {
+
+        Utils.checkName(title);
         this.title = title;
+
+        if (author == null) {
+            throw new IllegalArgumentException("Author should be defined.");
+        }
         this.author = author;
+
         this.year = year;
     }
 
@@ -15,16 +22,8 @@ public class Book {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Author getAuthor() {
         return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
     }
 
     public int getYear() {
@@ -34,4 +33,10 @@ public class Book {
     public void setYear(int year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return  author + ". \"" + title + "\", " + year + '.';
+    }
+
 }
