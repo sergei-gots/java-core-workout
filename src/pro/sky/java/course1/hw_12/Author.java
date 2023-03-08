@@ -3,29 +3,22 @@ package pro.sky.java.course1.hw_12;
 import java.util.Objects;
 
 public class Author {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Author(String firstName, String lastName) {
-        setFirstName(firstName);
-        setLastName(lastName);
+        Utils.checkName(firstName);
+        Utils.checkName(lastName);
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        Utils.checkName(firstName);
-        this.firstName = firstName;
-    }
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        Utils.checkName(lastName);
-        this.lastName = lastName;
     }
 
     @Override
