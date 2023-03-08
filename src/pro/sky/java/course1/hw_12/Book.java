@@ -1,8 +1,8 @@
 package pro.sky.java.course1.hw_12;
 
 public class Book {
-    private String title;
-    private Author author;
+    private final String title;
+    private final Author author;
     private int year;
 
     public Book(String title, Author author, int year) {
