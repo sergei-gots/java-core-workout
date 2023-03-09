@@ -9,9 +9,9 @@ import java.text.DecimalFormat;
  **/
 public class Employee {
     private static int nextId;
-    static private DecimalFormat salaryFormat = new DecimalFormat("###,###,##0.00");
-    private int id;
-    private String fullName;
+    private static final DecimalFormat salaryFormat = new DecimalFormat("###,###,##0.00");
+    private final int id;
+    private final String fullName;
     private int departmentId;
     private double salary;
 

@@ -72,9 +72,10 @@ public class EmployeeBook {
         return null;
     }
 
+
     /**
-     * @param fullName
-     * @param newSalary
+     * @param fullName .
+     * @param newSalary .
      * @return employee whose salary was successfully changed or null if there is no such employee with
      * specified fullName
      */
@@ -83,7 +84,10 @@ public class EmployeeBook {
         if (employee == null) {
             return null;
         }
+        String currentSalary = employee.getFormattedSalary();
         employee.setSalary(newSalary);
+        out.println("Зарплата сотрудника с Ф.И.О. " + fullName + " изменена с " +
+                currentSalary + " на " + employee.getFormattedSalary());
         return employee;
     }
 
@@ -201,9 +205,9 @@ public class EmployeeBook {
         out.println("Увеличение составит " + salaryIndexationPercentage + "%.");
 
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                employees[i].setSalary(employees[i].getSalary() * salaryMultiplier);
+        for (Employee employee : employees) {
+            if (employee != null) {
+                employee.setSalary(employee.getSalary() * salaryMultiplier);
             }
         }
 
@@ -310,10 +314,10 @@ public class EmployeeBook {
     public Employee findMaxWageEmployee() {
         double maxWage = Double.MIN_VALUE;
         Employee employeeWithMaxWage = null;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && maxWage < employees[i].getSalary()) {
-                maxWage = employees[i].getSalary();
-                employeeWithMaxWage = employees[i];
+        for (Employee employee : employees) {
+            if (employee != null && maxWage < employee.getSalary()) {
+                maxWage = employee.getSalary();
+                employeeWithMaxWage = employee;
             }
         }
         return employeeWithMaxWage;
