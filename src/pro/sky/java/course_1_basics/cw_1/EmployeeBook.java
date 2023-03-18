@@ -1,8 +1,8 @@
-package pro.sky.java.course_1.cw_1;
+package pro.sky.java.course_1_basics.cw_1;
 
 import static java.lang.System.out;
-import static pro.sky.java.course_1.cw_1.EmployeeBookUtils.DEPARTMENT_COUNT;
-import static pro.sky.java.course_1.cw_1.EmployeeBookUtils.EMPLOYEES_COUNT;
+import static pro.sky.java.course_1_basics.cw_1.EmployeeBookUtils.DEPARTMENT_COUNT;
+import static pro.sky.java.course_1_basics.cw_1.EmployeeBookUtils.EMPLOYEES_COUNT;
 
 public class EmployeeBook {
     private final Employee[] employees;

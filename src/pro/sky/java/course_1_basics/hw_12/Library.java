@@ -1,4 +1,4 @@
-package pro.sky.java.course_1.hw_12;
+package pro.sky.java.course_1_basics.hw_12;
 
 public class Library {
     private static final int CAPACITY = 10;

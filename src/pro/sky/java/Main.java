@@ -1,7 +1,7 @@
 package pro.sky.java;
 
-import pro.sky.java.course_1.*;
-import pro.sky.java.course_1.hw_12.Hw_12;
+import pro.sky.java.course_1_basics.*;
+import pro.sky.java.course_1_basics.hw_12.Hw_12;
 import pro.sky.java.util.Homework;
 
 public class Main {

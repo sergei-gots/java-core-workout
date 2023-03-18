@@ -1,19 +1,19 @@
-package pro.sky.java.course_1.cw_1;
+package pro.sky.java.course_1_basics.cw_1;
 
 import static java.lang.System.out;
-import static pro.sky.java.course_1.cw_1.EmployeeBookUtils.*;
+import static pro.sky.java.course_1_basics.cw_1.EmployeeBookUtils.*;
 
 public class Cw_1 {
     static final boolean isBasicTask = false;
     static final boolean isIncreasedComplexityTask = false;
     static final boolean isVeryDifficultTask = true;
 
-    static pro.sky.java.course_1.cw_1.EmployeeBook employeeBook = new EmployeeBook();
+    static pro.sky.java.course_1_basics.cw_1.EmployeeBook employeeBook = new EmployeeBook();
 
     public static void main(String[] args) {
         out.println("Курсовая работа # 1. \"Информация о сотрудниках компании\".\n");
 
-        pro.sky.java.course_1.cw_1.EmployeeBookUtils.recruitEmployees(employeeBook);
+        pro.sky.java.course_1_basics.cw_1.EmployeeBookUtils.recruitEmployees(employeeBook);
 
         if (isBasicTask) {
             doBasicTask();

@@ -1,4 +1,4 @@
-package pro.sky.java.course_1.cw_1;
+package pro.sky.java.course_1_basics.cw_1;
 
 import java.util.Random;
 

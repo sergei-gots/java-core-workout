@@ -1,4 +1,4 @@
-package pro.sky.java.course_1;
+package pro.sky.java.course_1_basics;
 
 import pro.sky.java.util.Homework;
 
