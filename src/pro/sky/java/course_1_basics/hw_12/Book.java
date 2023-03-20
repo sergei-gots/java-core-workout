@@ -3,14 +3,16 @@ package pro.sky.java.course_1_basics.hw_12;
 import java.util.Objects;
 
 public class Book {
-    private final String title;
+    private String title;
     private final Author author;
     private int year;
 
+    public Book (String title) {
+        this(title, new Author("Test-Author First Name", "Test-Author"), 0);
+    }
     public Book(String title, Author author, int year) {
 
-        Utils.checkName(title);
-        this.title = title;
+        setTitle(title);
 
         if (author == null) {
             throw new IllegalArgumentException("Author should be defined.");
@@ -54,5 +56,10 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(title, author, year);
+    }
+
+    public void setTitle(String title) {
+        Utils.checkName(title);
+        this.title = title;
     }
 }
