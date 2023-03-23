@@ -76,7 +76,7 @@ public class Hw_2_1 implements Homework {
     private void doTaks6() {
         System.out.println("\nTask #6");
 
-        Integer value = new Integer(33);
+        Integer value = 33;
         System.out.println("initial value = " + value);
         changeValue(value);
         System.out.println("Value after return from the \"changeValue\"-method = " + value);
