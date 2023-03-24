@@ -7,13 +7,13 @@ public class GriffindorStudent extends Student {
     private int chivalry;
     public  GriffindorStudent(String name) {
         super(name);
-        this.bravery = HogwartsService.generateQuality();
-        this.daring = HogwartsService.generateQuality();
-        this.chivalry = HogwartsService.generateQuality();
+        this.bravery = HogwartsService.generateTraitIndex();
+        this.daring = HogwartsService.generateTraitIndex();
+        this.chivalry = HogwartsService.generateTraitIndex();
     }
 
-    public String getTribeName() {
-        return "Griffindorer";
+    public String getFacultyName() {
+        return "Griffindor";
     }
 
     @Override
@@ -24,9 +24,9 @@ public class GriffindorStudent extends Student {
     @Override
     public String toString() {
         return super.toString() +
-            "\nGriffindor traits: " +
-            "\n\t bravery = " + bravery +
-            "\n\t daring = " + daring +
-            "\n\t chivalry = " + chivalry;
+            "\n\tGriffindor traits: " +
+            "\n\t\t bravery = " + bravery +
+            "\n\t\t daring = " + daring +
+            "\n\t\t chivalry = " + chivalry;
     }
 }

@@ -1,21 +1,25 @@
 package pro.sky.java.course_2_core.Hw_2_2_Hogwarts;
 
 public abstract class Student {
-    private String name;
+    private final String name;
     private int sorcery;
     private int transgressionDistance;
 
     public Student(String name) {
         this.name = name;
-        this.sorcery =  HogwartsService.generateQuality();
-        this.transgressionDistance = HogwartsService.generateQuality();
+        this.sorcery =  HogwartsService.generateTraitIndex();
+        this.transgressionDistance = HogwartsService.generateTraitIndex();
     }
 
     public String getName() {
         return name;
     }
 
-    public abstract String getTribeName();
+    public abstract String getFacultyName();
+
+    public String getTribeName() {
+        return getFacultyName() + "er";
+    }
     public int getSorcery() {
         return sorcery;
     }
@@ -27,10 +31,9 @@ public abstract class Student {
     public abstract  int getFacultySpecificTraitsIndex();
     @Override
     public String toString() {
-        return "\n" +
-        name + ", " + getTribeName() + ":" +
-        "\n\tPower of magic = " + sorcery +
-        "\n\tDistance of transgression = " + transgressionDistance;
+        return name + ", " + getTribeName() + ":" +
+        "\n\tmagic power = " + sorcery +
+        "\n\ttransgression distance = " + transgressionDistance;
     }
 
 
