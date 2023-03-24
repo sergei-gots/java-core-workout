@@ -114,7 +114,7 @@ public class HogwartsService {
     }
 
     public static Student getRandomStudent(Hogwarts hogwarts) {
-        return hogwarts.getRandomFaculty().getRandomStudent();
+        return hogwarts.getRandomStudent();
     }
 
     public static Student[] get2RandomStudentsToCompare(Hogwarts hogwarts) {
@@ -127,11 +127,11 @@ public class HogwartsService {
     }
 
     public static Student[] get2RandomHogwartsStudentsTheSameFacultyToCompare(Hogwarts hogwarts) {
-        Faculty faculty = hogwarts.getRandomFaculty();
-        Student student1 = faculty.getRandomStudent();
+        int facultyIndex = hogwarts.getRandomFacultyIndex();
+        Student student1 = hogwarts.getRandomStudentAtFaculty(facultyIndex);
         Student student2;
         do {
-            student2 = faculty.getRandomStudent();
+            student2 = hogwarts.getRandomStudentAtFaculty(facultyIndex);;
         } while (student1 == student2);
         return new Student[]{student1, student2};
     }

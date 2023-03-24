@@ -9,7 +9,15 @@ public class Hogwarts {
         this.faculties = faculties;
     }
 
-    public Faculty getRandomFaculty() {
-        return faculties[HogwartsService.RANDOM.nextInt(faculties.length)];
+    public int getRandomFacultyIndex() {
+        return HogwartsService.RANDOM.nextInt(faculties.length);
+    }
+
+    public Student getRandomStudentAtFaculty(int facultyIndex) {
+        return faculties[facultyIndex].getRandomStudent();
+    }
+
+    public Student getRandomStudent() {
+       return faculties[getRandomFacultyIndex()].getRandomStudent();
     }
 }
