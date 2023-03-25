@@ -5,11 +5,20 @@ public class HufflepuffStudent extends Student {
     private int justice;
     private int honesty;
     private int propensityForHardWork;
+
     public HufflepuffStudent(String name) {
-        super(name);
-        this.justice = HogwartsService.generateTraitIndex();
-        this.honesty = HogwartsService.generateTraitIndex();
-        this.propensityForHardWork = HogwartsService.generateTraitIndex();
+        this(name,
+                generateTraitIndex(), generateTraitIndex(),
+                generateTraitIndex(), generateTraitIndex(),
+                generateTraitIndex());
+    }
+
+    public HufflepuffStudent(String name, int sorcery, int transgressionDistance,
+                             int justice, int honesty, int propensityForHardWork) {
+        super(name, sorcery, transgressionDistance);
+        this.justice = justice;
+        this.honesty = honesty;
+        this.propensityForHardWork = propensityForHardWork;
     }
 
     public String getFacultyName() {
@@ -24,9 +33,9 @@ public class HufflepuffStudent extends Student {
     @Override
     public String toString() {
         return super.toString() +
-            "\n\tHufflepuff traits: " +
-            "\n\t\t justice = " + justice +
-            "\n\t\t honesty = " + honesty +
-            "\n\t\t propensity for hard work = " + propensityForHardWork;
+                "\n\tHufflepuff traits: " +
+                "\n\t\t justice = " + justice +
+                "\n\t\t honesty = " + honesty +
+                "\n\t\t propensity for hard work = " + propensityForHardWork;
     }
 }

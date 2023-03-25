@@ -5,10 +5,14 @@ public abstract class Student {
     private int sorcery;
     private int transgressionDistance;
 
-    public Student(String name) {
+    protected static  int generateTraitIndex() {
+        return HogwartsService.RANDOM.nextInt(101);
+    }
+
+    public Student(String name, int sorcery, int transgressionDistance) {
         this.name = name;
-        this.sorcery =  HogwartsService.generateTraitIndex();
-        this.transgressionDistance = HogwartsService.generateTraitIndex();
+        this.sorcery =  sorcery;
+        this.transgressionDistance =transgressionDistance;
     }
 
     public String getName() {
