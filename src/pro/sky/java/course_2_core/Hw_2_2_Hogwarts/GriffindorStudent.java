@@ -2,18 +2,26 @@ package pro.sky.java.course_2_core.Hw_2_2_Hogwarts;
 
 public class GriffindorStudent extends Student {
 
-    private int bravery;
-    private int daring;
-    private int chivalry;
-    public  GriffindorStudent(String name) {
-        super(name);
-        this.bravery = HogwartsService.generateQuality();
-        this.daring = HogwartsService.generateQuality();
-        this.chivalry = HogwartsService.generateQuality();
+    private final int bravery;
+    private final int daring;
+    private final int chivalry;
+
+    public GriffindorStudent(String name) {
+        this(name,
+                generateTraitIndex(), generateTraitIndex(),
+                generateTraitIndex(), generateTraitIndex(),
+                generateTraitIndex());
     }
 
-    public String getTribeName() {
-        return "Griffindorer";
+    public GriffindorStudent(String name, int sorcery, int transgressionDistance, int bravery, int daring, int chivalry) {
+        super(name, sorcery, transgressionDistance);
+        this.bravery = bravery;
+        this.daring = daring;
+        this.chivalry = chivalry;
+    }
+
+    public String getFacultyName() {
+        return "Griffindor";
     }
 
     @Override
@@ -23,10 +31,7 @@ public class GriffindorStudent extends Student {
 
     @Override
     public String toString() {
-        return super.toString() +
-            "\nGriffindor traits: " +
-            "\n\t bravery = " + bravery +
-            "\n\t daring = " + daring +
-            "\n\t chivalry = " + chivalry;
+        return super.toString() + "\n\tGriffindor traits: " + "\n\t\t bravery = " + bravery +
+                "\n\t\t daring = " + daring + "\n\t\t chivalry = " + chivalry;
     }
 }

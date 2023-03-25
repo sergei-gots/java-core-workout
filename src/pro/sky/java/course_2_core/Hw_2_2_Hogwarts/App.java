@@ -9,7 +9,7 @@ public class App implements Homework {
 
     @Override
     public void homework() {
-        Hogwarts hogwarts = HogwartsService.createHogwartsInsance();
+        Hogwarts hogwarts = HogwartsService.createHogwartsInstance();
         HogwartsService.printRandomStudentInfo(hogwarts);
         HogwartsService.printRandomStudentsCompareInfo(hogwarts);
         HogwartsService.printRandomStudentsTheSameFacultyCompareInfo(hogwarts);
