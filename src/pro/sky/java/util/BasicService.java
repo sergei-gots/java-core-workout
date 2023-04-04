@@ -8,19 +8,19 @@ public class BasicService {
 
     public static Random RANDOM = new Random();
 
-    protected static void printHeader(String header) {
+    public static void printHeader(String header) {
         out.println();
         printSeparator();
         out.print("===== ");
         out.println(header);
     }
 
-    protected static void printFooter() {
+    public static void printFooter() {
         printSeparator();
         out.println();
     }
 
-    protected static void printSeparator() {
+    public static void printSeparator() {
         out.println("================================================================================================");
     }
 
