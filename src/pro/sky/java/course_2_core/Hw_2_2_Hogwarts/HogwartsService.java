@@ -19,39 +19,39 @@ public class HogwartsService extends BasicService {
         });
     }
 
-    private static Student[] instatiateGriffindorStudents() {
-        return new Student[]{
+    private static HogwartsStudent[] instatiateGriffindorStudents() {
+        return new HogwartsStudent[]{
                 new GriffindorStudent("Harry Potter"),
                 new GriffindorStudent("Hermione Granger"),
                 new GriffindorStudent("Ron Weasley")
         };
     }
 
-    private static Student[] instatiateHufflepuffStudents() {
-        return new Student[]{
+    private static HogwartsStudent[] instatiateHufflepuffStudents() {
+        return new HogwartsStudent[]{
                 new HufflepuffStudent("Zacharias Smith"),
                 new HufflepuffStudent("Cedric Diggory"),
                 new HufflepuffStudent("Justin Finch-Fletchley")
         };
     }
 
-    private static Student[] instatiateSlytherinStudents() {
-        return new Student[]{
+    private static HogwartsStudent[] instatiateSlytherinStudents() {
+        return new HogwartsStudent[]{
                 new SlytherinStudent("Draco Malfoy"),
                 new SlytherinStudent("Graham Montague"),
                 new SlytherinStudent("Gregory Goyle")
         };
     }
 
-    private static Student[] instatiateRavenclawStudents() {
-        return new Student[]{
+    private static HogwartsStudent[] instatiateRavenclawStudents() {
+        return new HogwartsStudent[]{
                 new RavenclawStudent("Cho Chang"),
                 new RavenclawStudent("Padma Patil"),
                 new RavenclawStudent("Marcus Belby")
         };
     }
 
-    private static int[] getProperyValues(Student students[], String propertyGetter) {
+    private static int[] getProperyValues(HogwartsStudent students[], String propertyGetter) {
         Method method;
         int [] values = { 0, 0};
         try {
@@ -70,7 +70,7 @@ public class HogwartsService extends BasicService {
         return values;
     }
 
-    private static void printComparisonResult(Student[] students,
+    private static void printComparisonResult(HogwartsStudent[] students,
                                               String propertyGetter,
                                               String property) {
 
@@ -86,7 +86,7 @@ public class HogwartsService extends BasicService {
         }
     }
 
-    private static void printComparisonHeader(String department, Student[] students) {
+    private static void printComparisonHeader(String department, HogwartsStudent[] students) {
         printHeader("COMPARE TWO " + department + " STUDENTS:");
         printSeparator();
         out.println(students[0] +
@@ -95,7 +95,7 @@ public class HogwartsService extends BasicService {
         printSeparator();
     }
 
-    public static void compareAndShowStudentsByGeneralTraits(Student[] students)  {
+    public static void compareAndShowStudentsByGeneralTraits(HogwartsStudent[] students)  {
 
         printComparisonHeader("Hogwarts", students);
         printComparisonResult(students, "getSorcery", "power of magic");
@@ -103,7 +103,7 @@ public class HogwartsService extends BasicService {
         printFooter();
     }
 
-    public static void compareAndShowStudentsWithinFaculty(Student[] students) {
+    public static void compareAndShowStudentsWithinFaculty(HogwartsStudent[] students) {
         if (students[0].getClass() != students[1].getClass()) {
             throw new IllegalArgumentException("Students should be members of the same faculty.");
         }
@@ -112,7 +112,7 @@ public class HogwartsService extends BasicService {
         printFooter();
     }
 
-    private static void printWhoIsBetterAtFaculty(Student[] students) {
+    private static void printWhoIsBetterAtFaculty(HogwartsStudent[] students) {
         int [] values = getProperyValues(students, "getFacultySpecificTraitsIndex");
         if (values[0] > values[1]) {
             out.println(students[0].getName() + " is better " + students[0].getTribeName() + " than " + students[1].getName() + '.');
@@ -124,28 +124,28 @@ public class HogwartsService extends BasicService {
         }
     }
 
-    public static Student getRandomStudent(Hogwarts hogwarts) {
+    public static HogwartsStudent getRandomStudent(Hogwarts hogwarts) {
         return hogwarts.getRandomStudent();
     }
 
-    public static Student[] get2RandomStudentsToCompare(Hogwarts hogwarts) {
-        Student student1 = getRandomStudent(hogwarts);
-        Student student2;
+    public static HogwartsStudent[] get2RandomStudentsToCompare(Hogwarts hogwarts) {
+        HogwartsStudent student1 = getRandomStudent(hogwarts);
+        HogwartsStudent student2;
         do {
             student2 = getRandomStudent(hogwarts);
         } while (student1 == student2);
-        return new Student[]{student1, student2};
+        return new HogwartsStudent[]{student1, student2};
     }
 
-    public static Student[] get2RandomHogwartsStudentsTheSameFacultyToCompare(Hogwarts hogwarts) {
+    public static HogwartsStudent[] get2RandomHogwartsStudentsTheSameFacultyToCompare(Hogwarts hogwarts) {
         int facultyIndex = hogwarts.getRandomFacultyIndex();
-        Student student1 = hogwarts.getRandomStudentAtFaculty(facultyIndex);
-        Student student2;
+        HogwartsStudent student1 = hogwarts.getRandomStudentAtFaculty(facultyIndex);
+        HogwartsStudent student2;
         do {
             student2 = hogwarts.getRandomStudentAtFaculty(facultyIndex);
             ;
         } while (student1 == student2);
-        return new Student[]{student1, student2};
+        return new HogwartsStudent[]{student1, student2};
     }
 
     public static void printRandomStudentInfo(Hogwarts hogwarts) {

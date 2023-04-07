@@ -1,6 +1,6 @@
 package pro.sky.java.course_2_core.Hw_2_2_Hogwarts;
 
-public abstract class Student {
+public abstract class HogwartsStudent {
     private final String name;
     private int sorcery;
     private int transgressionDistance;
@@ -9,7 +9,7 @@ public abstract class Student {
         return HogwartsService.RANDOM.nextInt(101);
     }
 
-    public Student(String name, int sorcery, int transgressionDistance) {
+    public HogwartsStudent(String name, int sorcery, int transgressionDistance) {
         this.name = name;
         this.sorcery =  sorcery;
         this.transgressionDistance =transgressionDistance;

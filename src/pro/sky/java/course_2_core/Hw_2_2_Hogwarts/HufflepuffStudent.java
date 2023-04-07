@@ -1,6 +1,6 @@
 package pro.sky.java.course_2_core.Hw_2_2_Hogwarts;
 
-public class HufflepuffStudent extends Student {
+public class HufflepuffStudent extends HogwartsStudent {
 
     private int justice;
     private int honesty;

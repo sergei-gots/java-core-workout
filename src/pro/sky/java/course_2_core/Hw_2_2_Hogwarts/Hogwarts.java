@@ -13,11 +13,11 @@ public class Hogwarts {
         return HogwartsService.RANDOM.nextInt(faculties.length);
     }
 
-    public Student getRandomStudentAtFaculty(int facultyIndex) {
+    public HogwartsStudent getRandomStudentAtFaculty(int facultyIndex) {
         return faculties[facultyIndex].getRandomStudent();
     }
 
-    public Student getRandomStudent() {
+    public HogwartsStudent getRandomStudent() {
        return faculties[getRandomFacultyIndex()].getRandomStudent();
     }
 }
