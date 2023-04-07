@@ -10,8 +10,17 @@ public class Truck extends Car {
     }
 
     @Override
+    public void checkEngine() {
+        System.out.println("Проверяем двигатель у грузового автомобиля");
+    }
+    @Override
     public void check() {
         super.check();
         checkTrailer();
+    }
+
+    @Override
+    public void updateTyre(int index) {
+        System.out.println("Меняем покрышку у грузового автомобиля #" + index );
     }
 }

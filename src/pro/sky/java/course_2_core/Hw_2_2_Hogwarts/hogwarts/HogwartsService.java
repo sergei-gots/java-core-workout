@@ -1,4 +1,4 @@
-package pro.sky.java.course_2_core.Hw_2_2_Hogwarts;
+package pro.sky.java.course_2_core.Hw_2_2_Hogwarts.hogwarts;
 
 import pro.sky.java.util.BasicService;
 

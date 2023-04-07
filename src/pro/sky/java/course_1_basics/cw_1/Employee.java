@@ -1,5 +1,4 @@
 package pro.sky.java.course_1_basics.cw_1;
-
 import java.text.DecimalFormat;
 
 /**

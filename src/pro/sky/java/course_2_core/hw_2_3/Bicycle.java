@@ -4,4 +4,9 @@ public class Bicycle extends WheeledVehicle {
     public Bicycle(String modelName) {
         super(modelName, 2);
     }
+
+    @Override
+    public void updateTyre(int index) {
+        System.out.println("Меняем покрышку велосипеда #" + index );
+    }
 }
