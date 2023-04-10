@@ -4,9 +4,9 @@ import java.util.Random;
 
 import static java.lang.System.out;
 
-public class BasicService {
+public class BasicService extends ColorService {
 
-    public static Random RANDOM = new Random();
+    public final static Random RANDOM = new Random();
 
     public static void printHeader(String header) {
         out.println();
