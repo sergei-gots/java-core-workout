@@ -22,17 +22,18 @@ public class ColorService {
         resetConsoleColor();
     }
 
-    public static void printHeaderInColor(String header) {
+    public static void printTitleInColor(String header) {
         printInColor(header, ANSI_YELLOW);
     }
-
     public static void printInterfaceNameInColor(String interfaceName) {
         printInColor(interfaceName, ANSI_CYAN);
     }
-    public static void printClassNameInColor(String interfaceName) {
-        printInColor(interfaceName, ANSI_GREEN);
+    public static void printClassNameInColor(String className) {
+        printInColor(className, ANSI_GREEN);
     }
-
+    public static void printWarningnInColor(String warning) {
+        printInColor(warning, ANSI_RED);
+    }
     public static void printTermInColor(String interfaceName) {
         printInColor(interfaceName, ANSI_YELLOW);
     }
