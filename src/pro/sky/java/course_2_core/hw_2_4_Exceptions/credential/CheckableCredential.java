@@ -1,4 +1,4 @@
-package pro.sky.java.course_2_core.hw_2_4_exceptions.credential;
+package pro.sky.java.course_2_core.hw_2_4_Exceptions.credential;
 
 public interface CheckableCredential {
     /**

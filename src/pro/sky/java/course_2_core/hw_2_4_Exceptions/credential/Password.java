@@ -1,6 +1,6 @@
-package pro.sky.java.course_2_core.hw_2_4_exceptions.credential;
+package pro.sky.java.course_2_core.hw_2_4_Exceptions.credential;
 
-import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.exceptions.WrongPasswordException;
+import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongPasswordException;
 
 public class Password extends LoginCredential{
     public final static int MAX_LENGTH = 19;

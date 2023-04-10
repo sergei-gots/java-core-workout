@@ -1,8 +1,8 @@
-package pro.sky.java.course_2_core.hw_2_4_exceptions;
+package pro.sky.java.course_2_core.hw_2_4_Exceptions;
 
-import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.Login;
-import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.LoginCredential;
-import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.Password;
+import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.Login;
+import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.LoginCredential;
+import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.Password;
 import pro.sky.java.util.BasicService;
 
 public class ValidatorService extends BasicService {
