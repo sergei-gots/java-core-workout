@@ -2,6 +2,7 @@ package pro.sky.java.course_2_core.hw_2_4_Exceptions;
 
 import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongLoginException;
 import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongPasswordException;
+import pro.sky.java.util.BasicService;
 import pro.sky.java.util.Homework;
 
 public class Hw_2_4_Exceptions implements Homework {
@@ -21,23 +22,30 @@ public class Hw_2_4_Exceptions implements Homework {
         login = ValidatorService.generatateCorrectTestLogin();
         password = ValidatorService.generatateCorrectTestPassword();
         confirmPassword = password;
+        BasicService.printHeader("Case #1. Everything is correct.");
         validate(login, password, confirmPassword);
 
+        BasicService.printHeader("Case #2. ConfirmPassword isn't equal to the Password.");
         confirmPassword = confirmPassword.substring(0,confirmPassword.length()-1);
         validate(login, password, confirmPassword);
 
+        BasicService.printHeader("Case #3. Password has exceed length.");
         password = ValidatorService.generatateWrongByLengthTestPassword();
         validate(login, password, confirmPassword);
 
-        password = ValidatorService.generatateWrongByContentTestPassword();
+        BasicService.printHeader("Case #4. Password contains non allowed symbols.");
+        password = ValidatorService.generatatePresumablyWrongByContentTestPassword();
         validate(login, password, confirmPassword);
 
+        BasicService.printHeader("Case #5. Login has exceed length.");
         login = ValidatorService.generatateWrongByLengthTestLogin();
         validate(login, password, confirmPassword);
 
-        login = ValidatorService.generatateWrongByContentTestLogin();
+        BasicService.printHeader("Case #6. Login contains non allowed symbols.");
+        login = ValidatorService.generatatePresumablyWrongByContentTestLogin();
         validate(login, password, confirmPassword);
 
+        BasicService.printHeader("Case #7. Everything is ok again.");
         login = ValidatorService.generatateCorrectTestLogin();
         password = ValidatorService.generatateCorrectTestPassword();
         confirmPassword = password;
@@ -50,7 +58,8 @@ public class Hw_2_4_Exceptions implements Homework {
 
     private void validate(String login, String password, String confirmPassword) {
         try {
-            System.out.println("ValidatorService.validate(login, password, confirm_password) = "
+            System.out.println("ValidatorService.validate(login=\"" + login + "\", password=\""
+                    + password + "\", confirm_password=\"" + confirmPassword + "\") = "
                     + ValidatorService.validate(login, password, confirmPassword));
         } catch (WrongPasswordException | WrongLoginException e) {
             System.out.println("Exception " + e.getClass().getSimpleName() + " was thrown");

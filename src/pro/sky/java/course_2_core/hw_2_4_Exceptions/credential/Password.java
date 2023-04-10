@@ -2,21 +2,23 @@ package pro.sky.java.course_2_core.hw_2_4_Exceptions.credential;
 
 import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongPasswordException;
 
-public class Password extends LoginCredential{
+public class Password extends LoginCredential {
     public final static int MAX_LENGTH = 19;
+
     public Password(String value, String confirmedPassword) {
         super(value);
         if (!value.equals(confirmedPassword)) {
             throw new WrongPasswordException("Password and confirm-password aren't equal.");
         }
     }
+
     /**
      * throws WrongPasswordException when its length more than 20.
      */
     @Override
     public void checkLength() {
         if (getValue().length() > MAX_LENGTH) {
-            throwWrongCredentialException("Length of a password must be less than " + (MAX_LENGTH + 1) + ".");
+            throwWrongCredentialException("Length of password must be less than " + (MAX_LENGTH + 1) + ".");
         }
     }
 

@@ -6,7 +6,7 @@ public interface CheckableCredential {
      */
     void checkLength();
     /**
-     *  throws some uncheckable Exception if credential contains unallowed symbols.
+     *  throws some uncheckable Exception if credential contains not allowed symbols.
      */
     void checkContent();
 

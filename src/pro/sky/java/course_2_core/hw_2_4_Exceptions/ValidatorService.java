@@ -33,11 +33,7 @@ public class ValidatorService extends BasicService {
     }
 
     private static int generateNonZeroCredentialLength(int maxLength) {
-        int l;
-        do {
-            l = RANDOM.nextInt(Login.MAX_LENGTH);
-        } while (l == 0);
-        return l;
+        return 1 + RANDOM.nextInt(maxLength-1);
     }
 
     public static String generatateCorrectTestLogin() {
@@ -49,7 +45,7 @@ public class ValidatorService extends BasicService {
         return generateCorrectContent(Login.MAX_LENGTH + generateNonZeroCredentialLength(10));
     }
 
-    public static String generatateWrongByContentTestLogin() {
+    public static String generatatePresumablyWrongByContentTestLogin() {
         return generatePresumablyWrongContent(generateNonZeroCredentialLength(Login.MAX_LENGTH));
     }
 
@@ -62,7 +58,7 @@ public class ValidatorService extends BasicService {
         return generateCorrectContent(Password.MAX_LENGTH) + generateNonZeroCredentialLength(10);
     }
 
-    public static String generatateWrongByContentTestPassword() {
+    public static String generatatePresumablyWrongByContentTestPassword() {
         return generatePresumablyWrongContent(generateNonZeroCredentialLength(Password.MAX_LENGTH));
     }
 
@@ -72,7 +68,6 @@ public class ValidatorService extends BasicService {
             credential[i] = LoginCredential.ALLOWED_CHARACTERS.charAt(
                     RANDOM.nextInt(LoginCredential.ALLOWED_CHARACTERS.length()));
         }
-        System.out.println("credential = " + credential);
         return new String(credential);
 
     }
@@ -84,7 +79,6 @@ public class ValidatorService extends BasicService {
         for (int i = 0; i < length; i++) {
             credential[i] = (char) (minCharValue + RANDOM.nextInt(maxCharValue - minCharValue));
         }
-        System.out.println("credential = " + credential);
         return new String(credential);
     }
 
