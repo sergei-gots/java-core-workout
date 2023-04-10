@@ -1,6 +1,6 @@
 package pro.sky.java.util;
 
-public abstract class ColorService {
+public class ColorService {
     public static final String ANSI_WHITE = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -22,5 +22,19 @@ public abstract class ColorService {
         resetConsoleColor();
     }
 
+    public static void printHeaderInColor(String header) {
+        printInColor(header, ANSI_YELLOW);
+    }
+
+    public static void printInterfaceNameInColor(String interfaceName) {
+        printInColor(interfaceName, ANSI_CYAN);
+    }
+    public static void printClassNameInColor(String interfaceName) {
+        printInColor(interfaceName, ANSI_GREEN);
+    }
+
+    public static void printTermInColor(String interfaceName) {
+        printInColor(interfaceName, ANSI_YELLOW);
+    }
 
 }
