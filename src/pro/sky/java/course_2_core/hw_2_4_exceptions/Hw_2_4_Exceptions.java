@@ -1,7 +1,7 @@
-package pro.sky.java.course_2_core.hw_2_4_Exceptions;
+package pro.sky.java.course_2_core.hw_2_4_exceptions;
 
-import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongLoginException;
-import pro.sky.java.course_2_core.hw_2_4_Exceptions.credential.exceptions.WrongPasswordException;
+import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.exceptions.WrongLoginException;
+import pro.sky.java.course_2_core.hw_2_4_exceptions.credential.exceptions.WrongPasswordException;
 import pro.sky.java.util.BasicService;
 import pro.sky.java.util.Homework;
 

@@ -1,4 +1,4 @@
-package pro.sky.java.course_2_core.Hw_2_2_Hogwarts.hogwarts;
+package pro.sky.java.course_2_core.hw_2_2_hogwarts.hogwarts;
 
 public abstract class HogwartsStudent {
     private final String name;

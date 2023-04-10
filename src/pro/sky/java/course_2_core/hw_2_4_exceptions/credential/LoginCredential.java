@@ -1,4 +1,4 @@
-package pro.sky.java.course_2_core.hw_2_4_Exceptions.credential;
+package pro.sky.java.course_2_core.hw_2_4_exceptions.credential;
 
 /**
  * The end-implementations of this class should have descriptive names like "Login", "Password", etc.

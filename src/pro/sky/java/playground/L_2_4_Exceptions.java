@@ -1,6 +1,6 @@
 package pro.sky.java.playground;
 
-public class L_2_5_Exceptions {
+public class L_2_4_Exceptions {
     public static void main(String[] args) {
         method3();
     }
