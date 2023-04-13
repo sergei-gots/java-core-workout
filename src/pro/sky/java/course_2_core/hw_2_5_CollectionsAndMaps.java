@@ -25,8 +25,8 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
         List numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
         printOddNumbers(numbers);
 
-        numbers = new ArrayList<>(List.of(1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
-        printUniqueEvenNumbers(numbers);
+        numbers = new ArrayList<>(List.of(2, 1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
+        printUniqueEvenNumbersSortedAscending(numbers);
 
         printUniqueWordsFromSequence(tongueTwister);
 
@@ -54,9 +54,11 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
         System.out.print("]\n");
     }
 
-    private void printUniqueEvenNumbers(List<Integer> numbers) {
-        printTaskHeader("Task #2: print to console only unique even numbers from a given sequence of numbers: ");
+    private void printUniqueEvenNumbersSortedAscending(List<Integer> numbers) {
+        printTaskHeader("Task #2: print to console only unique even numbers sorted ascending from a given sequence of numbers: ");
         System.out.println("numbers = " + numbers);
+        Collections.sort(numbers);
+        System.out.println("sorted numbers = " + numbers);
         Set<Integer> set = new HashSet<>(numbers);
         System.out.print("All the unique even numbers = [");
         boolean found = false;
