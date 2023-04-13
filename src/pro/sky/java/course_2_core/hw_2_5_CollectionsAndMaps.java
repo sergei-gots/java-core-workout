@@ -62,8 +62,7 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
         Set<Integer> set = new HashSet<>(numbers);
         System.out.print("All the unique even numbers = [");
         boolean found = false;
-        for (Iterator<Integer> itetator = set.iterator(); itetator.hasNext(); ) {
-            int k = itetator.next();
+        for (int k : set) {
             if (k % 2 == 0) {
                 System.out.print(k);
                 System.out.print(", ");
@@ -89,8 +88,7 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
         System.out.println("Words sequence is " + strings + '.');
         Set<String> set = new HashSet<>(strings);
         System.out.println("Words frequencies are:");
-        for (Iterator<String> iterator = set.iterator(); iterator.hasNext(); ) {
-            String s = iterator.next();
+        for (String s : set) {
             System.out.println(s + ":\t\t" + Collections.frequency(strings, s));
         }
     }
