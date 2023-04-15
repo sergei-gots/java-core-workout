@@ -1,12 +1,12 @@
 package pro.sky.java.playground;
 
-public class Lambda {
+public class QA_12_LambdaStreamsAndOptional {
 
     private int a;
     private static int s;
 
     public static void main(String[] args) {
-        Lambda lambda = new Lambda();
+        QA_12_LambdaStreamsAndOptional lambda = new QA_12_LambdaStreamsAndOptional();
         InnerClass innerClass = lambda.new InnerClass();
         NestedClass nestedClass = new NestedClass();
 
@@ -36,7 +36,7 @@ public class Lambda {
 
     static class NestedClass {
         void f() {
-            System.out.println("Lambda.s = " + Lambda.s);
+            System.out.println("Lambda.s = " + QA_12_LambdaStreamsAndOptional.s);
         }
     }
 
