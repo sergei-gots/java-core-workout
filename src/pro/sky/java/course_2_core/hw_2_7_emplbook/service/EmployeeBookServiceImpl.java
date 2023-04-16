@@ -194,7 +194,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double minWage = Double.MAX_VALUE;
         Employee employeeWithMinWage = null;
         for (Employee employee : employees.values()) {
-            if (employee != null && minWage > employee.salary()) {
+            if (minWage > employee.salary()) {
                 minWage = employee.salary();
                 employeeWithMinWage = employee;
             }
