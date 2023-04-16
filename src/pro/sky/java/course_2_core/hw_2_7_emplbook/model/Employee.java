@@ -1,5 +1,8 @@
 package pro.sky.java.course_2_core.hw_2_7_emplbook.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -62,27 +65,27 @@ public class Employee {
         return id + ". " + firstName + " " + lastName + ": " + departmentId + "-й отдел, зарплата: " + formatSalary(salary);
     }
 
+
     public String getName() {
         return firstName + " " + lastName;
     }
 
+    @JsonProperty("department")
     public int getDepartmentId() {
         return departmentId;
     }
 
-    public String getSalary() {
+    @JsonProperty("salary")
+    public String getSalaryRub() {
         return formatSalary(salary);
-    }
-
-    public String firstName() {
-        return firstName;
     }
 
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 
-    public double salary() {
+    @JsonIgnore
+    public double getSalary() {
         return salary;
     }
 

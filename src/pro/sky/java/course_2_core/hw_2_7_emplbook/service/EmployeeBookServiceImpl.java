@@ -86,7 +86,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     public List<Employee> findEmployeesWithSalaryGreaterOrEqualTo(int targetSalary) {
         List<Employee> employeesTargetedSalary = new ArrayList<>();
         for (Employee employee : employees.values()) {
-            if (employee.salary() >= targetSalary) {
+            if (employee.getSalary() >= targetSalary) {
                 employeesTargetedSalary.add(employee);
             }
         }
@@ -97,7 +97,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     public List<Employee> findEmployeesWithSalaryLessThan(double targetSalary) {
         List<Employee> employeesTargetedSalary = new ArrayList<>();
         for (Employee employee : employees.values()) {
-            if (employee.salary() < targetSalary) {
+            if (employee.getSalary() < targetSalary) {
                 employeesTargetedSalary.add(employee);
             }
         }
@@ -121,7 +121,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         List<Employee> employeesInDepartment = findEmployeesByDepartment(departmentId);
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
         for (Employee employee : employees.values()) {
-            employee.setSalary(employee.salary() * salaryMultiplier);
+            employee.setSalary(employee.getSalary() * salaryMultiplier);
         }
         return employeesInDepartment;
     }
@@ -130,7 +130,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     public List<Employee> indexSalary(int salaryIndexationPercentage) {
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
         for (Employee employee : employees.values()) {
-            employee.setSalary(employee.salary() * salaryMultiplier);
+            employee.setSalary(employee.getSalary() * salaryMultiplier);
         }
         return getList();
     }
@@ -144,7 +144,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         for (Employee employee : employees.values()) {
             if (employee.getDepartmentId() == departmentId) {
                 count++;
-                sum += employee.salary();
+                sum += employee.getSalary();
             }
         }
         return Employee.formatSalary((count == 0) ? 0 : (sum / count));
@@ -155,8 +155,8 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double maxWage = Double.MIN_VALUE;
         Employee employeeWithMaxWage = null;
         for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId && employee.salary() > maxWage) {
-                maxWage = employee.salary();
+            if (employee.getDepartmentId() == departmentId && employee.getSalary() > maxWage) {
+                maxWage = employee.getSalary();
                 employeeWithMaxWage = employee;
             }
         }
@@ -168,8 +168,8 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double minWage = Double.MAX_VALUE;
         Employee employeeWithMinWage = null;
         for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId && employee.salary() < minWage) {
-                minWage = employee.salary();
+            if (employee.getDepartmentId() == departmentId && employee.getSalary() < minWage) {
+                minWage = employee.getSalary();
                 employeeWithMinWage = employee;
             }
         }
@@ -181,8 +181,8 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double maxWage = Double.MIN_VALUE;
         Employee employeeWithMaxWage = null;
         for (Employee employee : employees.values()) {
-            if (employee != null && maxWage < employee.salary()) {
-                maxWage = employee.salary();
+            if (employee != null && maxWage < employee.getSalary()) {
+                maxWage = employee.getSalary();
                 employeeWithMaxWage = employee;
             }
         }
@@ -194,8 +194,8 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double minWage = Double.MAX_VALUE;
         Employee employeeWithMinWage = null;
         for (Employee employee : employees.values()) {
-            if (minWage > employee.salary()) {
-                minWage = employee.salary();
+            if (minWage > employee.getSalary()) {
+                minWage = employee.getSalary();
                 employeeWithMinWage = employee;
             }
         }
@@ -210,7 +210,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     private double calculateMonthlyPayrollAsNumber() {
         double sum = 0;
         for (Employee employee : employees.values()) {
-            sum += employee.salary();
+            sum += employee.getSalary();
         }
         return sum;
     }
@@ -226,7 +226,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         double sum = 0;
         for (Employee employee : employees.values()) {
             if (employee.getDepartmentId() == departmentId) {
-                sum += employee.salary();
+                sum += employee.getSalary();
             }
         }
         return Employee.formatSalary(sum);

@@ -9,9 +9,22 @@ import java.util.List;
 public class L_2_5_CollectionsAndMaps {
     public static void main(String[] args) {
         tip();
+        lists();
         arraysAndArrayLists();
         maps();
         sets();
+    }
+
+    private static void lists() {
+        printTitleInColor("Lists: ");
+        printClassNameInColor("LinkedList<E>\n");
+
+        List<String> list = new LinkedList(List.of("1", "2", "3"));
+        System.out.println("list = " + list);
+        System.out.println("list.remove(new String(\"2\")) = " + list.remove(new String("2")));
+        System.out.println("list = " + list);
+
+        System.out.println();
     }
 
 
@@ -42,6 +55,7 @@ public class L_2_5_CollectionsAndMaps {
         printServiceWordsInColor("\n\t\timplements ");
         printInterfaceNameInColor("Set<E>, Cloneable, java.io.Serializable\n\n");
 
+
         printServiceWordsInColor("\t\tpublic abstract class ");
         printClassNameInColor("AbstractSet<E> ");
         printServiceWordsInColor("extends ");
@@ -49,11 +63,22 @@ public class L_2_5_CollectionsAndMaps {
         printServiceWordsInColor("\n\t\t\t\timplements ");
         printInterfaceNameInColor("Set<E> ");
         printServiceWordsInColor("{\n\tprivate transient ");
-        printClassNameInColor("HashMap<E,Object ");
+        printClassNameInColor("HashMap<E,Object> ");
         printTermInColor(" map = ");
         printServiceWordsInColor("new ");
         printClassNameInColor("HashMap();");
         printServiceWordsInColor("\n}\n\n");
+
+        print("So that ");
+        printClassNameInColor("HashSet<E> ");
+        print("just has field ");
+        printTermInColor("map ");
+        print("of ");
+        printClassNameInColor("HashMap(<E>, Object) ");
+        print("(or ");
+        printClassNameInColor("LinkedHashMap(<E>, Object)");
+        print(") and in this hashmap as value each time will be used DUMMY ");
+        printTermInColor("final static Object PRESENT = new Object();\n\n");
 
         Set<Integer> integers = new HashSet<>();
         System.out.println("integers.add(1) = " + integers.add(1));
@@ -71,22 +96,28 @@ public class L_2_5_CollectionsAndMaps {
         printInterfaceNameInColor("Map\n");
 
         printInterfaceNameInColor("Map<K,V>");
-        print(" is the ");
-        printInterfaceNameInColor("Map<K,V> ");
-        print(" and ");
-        printWarningnInColor("not a ");
-        printInterfaceNameInColor("Collection<E>\n");
-        print("and so that we use method ");
-        printTermInColor("put(key, value)");
-        print(" instead of ");
-        printTermInColor("add(value)\n\n");
+            print(" is the ");
+            printInterfaceNameInColor("Map<K,V> ");
+            print(" and ");
+            printWarningnInColor("not a ");
+            printInterfaceNameInColor("Collection<E>\n");
+            print("and so that we use method ");
+            printTermInColor("put(key, value)");
+            print(" instead of ");
+            printTermInColor("add(value)\n\n");
+
+        printTermInColor("<Key>");
+        print("-class should be better represented with immutable one - like  ");
+        printClassNameInColor("String, Integer");
+        print(", ... etc.\n\n");
+
 
         print("public class ");
-        printClassNameInColor("HashMap<K,V>");
-        print(" extends ");
-        printClassNameInColor("AbstractMap<K,V>\n");
-        print("\t\t\t implements ");
-        printInterfaceNameInColor("Map<K,V>, Cloneable, Serializable\n\n");
+            printClassNameInColor("HashMap<K,V>");
+            print(" extends ");
+            printClassNameInColor("AbstractMap<K,V>\n");
+            print("\t\t\t implements ");
+            printInterfaceNameInColor("Map<K,V>, Cloneable, Serializable\n\n");
 
         Map<String, Integer> numbersMap = new HashMap<>();
 
@@ -171,7 +202,21 @@ public class L_2_5_CollectionsAndMaps {
                     entry.getKey() + ", " + entry.getValue());
         }
 
-        System.out.println("\n\n");
+        print("\n");
+
+        Map<String, Integer> map1 = new HashMap<>();
+        Map<String, Integer> map2 = new TreeMap<>();
+        Map<String, Integer> map3 = new LinkedHashMap<>();
+
+        print("Method which returns ");
+        printInterfaceNameInColor("Collection <V> ");
+        print("is ");
+        printTermInColor("values()\n");
+
+        print("Method which returns ");
+        printInterfaceNameInColor("Set<Entry<K,V> ");
+        print("is ");
+        printTermInColor("entrySet()\n\n");
 
     }
 
