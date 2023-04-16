@@ -6,34 +6,41 @@ import pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions.EmployeeNotFoundExc
 import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
 import pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.System.out;
 import static pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils.*;
 
 @Service
-public class EmployeeBookServiceImpl implements EmployeesBookService{
+public class EmployeeBookServiceImpl implements EmployeesBookService {
 
-    private final Map <String, Employee> employees;
+    private final Map<String, Employee> employees;
 
     public EmployeeBookServiceImpl() {
         employees = EmployeeBookUtils.generateEmployees();
     }
 
+    private static void checkDepartmentId(int departmentId) {
+        if (departmentId < 1 || departmentId > DEPARTMENT_COUNT) {
+            throw new IllegalArgumentException("Department with number " + departmentId + " is not listed.");
+        }
+    }
+
     @Override
     public Employee addEmployee(Employee employee) {
-        if(employees.containsKey(employee.key())) {
+        if (employees.containsKey(employee.key())) {
             throw new EmployeeAlreadyAddedException();
         }
-        return employees.put(employee.key(), employee);
+        employees.put(employee.key(), employee);
+        return employee;
     }
 
     @Override
     public Employee removeEmployee(Employee employee) {
         final String key = employee.key();
         final Employee employeeToRemove = employees.get(key);
-        if(employeeToRemove == null) {
+        if (employeeToRemove == null) {
             throw new EmployeeNotFoundException();
         }
         employees.remove(key);
@@ -43,7 +50,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService{
     @Override
     public Employee findEmployee(Employee employee) {
         final Employee foundEmployee = employees.get(employee.key());
-        if(foundEmployee == null) {
+        if (foundEmployee == null) {
             throw new EmployeeNotFoundException();
         }
         return foundEmployee;
@@ -54,166 +61,101 @@ public class EmployeeBookServiceImpl implements EmployeesBookService{
         return List.copyOf(employees.values());
     }
 
-    private static void checkDepartmentId(int departmentId) {
-        if (departmentId < 1 || departmentId > DEPARTMENT_COUNT) {
-            throw new IllegalArgumentException("Задан несуществующий номер отдела: " + departmentId);
-        }
-    }
-
-
-    /**
-     * @param newSalary .
-     * @return employee whose salary was successfully changed or null if there is no such employee with
-     * specified fullName
-     */
-    public Employee changeSalary(Employee employee, double newSalary) {
+    @Override
+    public Employee setSalary(Employee employee, int newSalary) {
         Employee employeeToUpdate = employees.get(employee.key());
         if (employeeToUpdate == null) {
             throw new EmployeeNotFoundException();
         }
-        String currentSalary = employee.getSalary();
-        employee.setSalary(newSalary);
-        out.println("Зарплата сотрудника с Ф.И.О. " + employee.getName() + " изменена с " +
-                currentSalary + " на " + employee.getSalary());
+        employeeToUpdate.setSalary(newSalary);
         return employeeToUpdate;
     }
 
-    public void printEmployeesByDepartments() {
-        out.println("Списки сотрудников компании по отделам.");
-        for (int i = 1; i <= DEPARTMENT_COUNT; i++) {
-            printEmployeesListInDepartment(i);
-        }
-    }
-
-    public Employee changeDepartment(Employee employee, int newDepartmentId) {
+    @Override
+    public Employee setDepartment(Employee employee, int newDepartmentId) {
         checkDepartmentId(newDepartmentId);
         Employee employeeToUpdate = employees.get(employee.key());
-        if (employee == null) {
+        if (employeeToUpdate == null) {
             throw new EmployeeNotFoundException();
         }
-        employee.setDepartmentId(newDepartmentId);
+        employeeToUpdate.setDepartmentId(newDepartmentId);
         return employeeToUpdate;
     }
 
-
-    public void printAverageSalaryInDepartment(int departmentId) {
-        checkDepartmentId(departmentId);
-        out.print("Средняя зарплата в " + departmentId + "-м отделе составляет "
-                + Employee.formatSalary(calcAverageSalaryInDepartment(departmentId)) + "\n\n");
-    }
-
-    public void printMaxWageEmployeeInDepartment(int departmentId) {
-        Employee employee = findMaxWageEmployeeInDepartment(departmentId);
-        out.println("Сотрудник с максимальной зарплатой в " + departmentId + "-м отделе:");
-        out.print("\t" + employee.firstName());
-        out.print(" Зарплата составляет " + employee.getSalary());
-        out.print("\n\n");
-    }
-
-    public void printMinWageEmployeeInDepartment(int departmentId) {
-        Employee employee = findMinWageEmployeeInDepartment(departmentId);
-        out.println("Сотрудник с минимальной зарплатой в " + departmentId + "-м отделе:");
-        out.print("\t" + employee.firstName());
-        out.print(" Зарплата составляет " + employee.getSalary());
-        out.print("\n\n");
-    }
-
-    public void printEmployeesWithSalaryGreaterOrEqualTo(double targetSalary) {
-        out.println("Список сотрудников с зарплатой, равной или превышающей " + Employee.formatSalary(targetSalary) + ':');
-        boolean areFound = false;
+    @Override
+    public List<Employee> findEmployeesWithSalaryGreaterOrEqualTo(int targetSalary) {
+        List<Employee> employeesTargetedSalary = new ArrayList<>();
         for (Employee employee : employees.values()) {
-            if (employee != null && employee.salary() >= targetSalary) {
-                areFound = true;
-                out.println(employee.toString());
+            if (employee.salary() >= targetSalary) {
+                employeesTargetedSalary.add(employee);
             }
         }
-        if (!areFound) {
-            out.println("\tтаковых сотрудников не найдено.");
-        }
-        out.println();
+        return employeesTargetedSalary;
     }
 
-    public void printEmployeesWithSalaryLessThan(double targetSalary) {
-        out.println("Список сотрудников с зарплатой, меньшей чем " + Employee.formatSalary(targetSalary) + ':');
-        boolean areFound = false;
+    @Override
+    public List<Employee> findEmployeesWithSalaryLessThan(double targetSalary) {
+        List<Employee> employeesTargetedSalary = new ArrayList<>();
         for (Employee employee : employees.values()) {
-            if (employee != null && employee.salary() < targetSalary) {
-                out.println(employee.toString());
+            if (employee.salary() < targetSalary) {
+                employeesTargetedSalary.add(employee);
             }
         }
-        if (!areFound) {
-            out.println("\tтаковых сотрудников не найдено.");
-        }
-        out.println();
+        return employeesTargetedSalary;
     }
 
-    public void printEmployeesListInDepartment(int departmentId) {
-        boolean departmentIsEmpty = true;
+    @Override
+    public List<Employee> findEmployeesByDepartment(int departmentId) {
+        List<Employee> employeesInDepartment = new ArrayList<>();
         checkDepartmentId(departmentId);
-        out.println("Список сотрудников " + departmentId + "-го отдела:");
         for (Employee employee : employees.values()) {
-            if (employee != null && departmentId == employee.getDepartmentId()) {
-                out.println(employee.toString());
-                departmentIsEmpty = false;
+            if (departmentId == employee.getDepartmentId()) {
+                employeesInDepartment.add(employee);
             }
         }
-        if(departmentIsEmpty) {
-            out.println("Сотрудников в отделе на данный момент нет.\n");
-        }
-        out.println();
+        return employeesInDepartment;
     }
 
-    public void indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage) {
-        out.println("Индексация зарплаты.");
-        checkDepartmentId(departmentId);
-        out.print("Производится индексация зарплаты для всех сотрудников " + departmentId + "-го отдела.");
-        out.println("Увеличение составит " + salaryIndexationPercentage + "%.");
-
+    @Override
+    public List<Employee> indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage) {
+        List<Employee> employeesInDepartment = findEmployeesByDepartment(departmentId);
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
         for (Employee employee : employees.values()) {
-            if (employee != null && departmentId == employee.getDepartmentId()) {
-                employee.setSalary(employee.salary() * salaryMultiplier);
-            }
-
+            employee.setSalary(employee.salary() * salaryMultiplier);
         }
-        out.println();
+        return employeesInDepartment;
     }
 
-    public void indexSalary(int salaryIndexationPercentage) {
-        out.println("Индексация зарплаты.");
-        out.print("Производится индексация зарплаты для всех сотрудников компании.");
-        out.println("Увеличение составит " + salaryIndexationPercentage + "%.");
-
+    @Override
+    public List<Employee> indexSalary(int salaryIndexationPercentage) {
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
         for (Employee employee : employees.values()) {
-            if (employee != null) {
-                employee.setSalary(employee.salary() * salaryMultiplier);
-            }
+            employee.setSalary(employee.salary() * salaryMultiplier);
         }
-
-        out.println();
+        return getList();
     }
 
-    public double calcAverageSalaryInDepartment(int departmentId) {
+    @Override
+    public String calcAverageSalaryInDepartment(int departmentId) {
         double sum = 0;
         int count = 0;
         checkDepartmentId(departmentId);
 
         for (Employee employee : employees.values()) {
-            if (employee != null && employee.getDepartmentId() == departmentId) {
+            if (employee.getDepartmentId() == departmentId) {
                 count++;
                 sum += employee.salary();
             }
         }
-        return sum / count;
+        return Employee.formatSalary((count == 0) ? 0 : (sum / count));
     }
 
+    @Override
     public Employee findMaxWageEmployeeInDepartment(int departmentId) {
         double maxWage = Double.MIN_VALUE;
         Employee employeeWithMaxWage = null;
         for (Employee employee : employees.values()) {
-            if (employee != null && employee.getDepartmentId() == departmentId
-                    && employee.salary() > maxWage) {
+            if (employee.getDepartmentId() == departmentId && employee.salary() > maxWage) {
                 maxWage = employee.salary();
                 employeeWithMaxWage = employee;
             }
@@ -221,13 +163,12 @@ public class EmployeeBookServiceImpl implements EmployeesBookService{
         return employeeWithMaxWage;
     }
 
+    @Override
     public Employee findMinWageEmployeeInDepartment(int departmentId) {
         double minWage = Double.MAX_VALUE;
         Employee employeeWithMinWage = null;
         for (Employee employee : employees.values()) {
-            if (employee != null
-                    && employee.getDepartmentId() == departmentId
-                    && employee.salary() < minWage) {
+            if (employee.getDepartmentId() == departmentId && employee.salary() < minWage) {
                 minWage = employee.salary();
                 employeeWithMinWage = employee;
             }
@@ -235,52 +176,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService{
         return employeeWithMinWage;
     }
 
-    public void printAverageSalary() {
-        out.println("Средняя зарплата по компании составляет " + Employee.formatSalary(calcAverageSalary()));
-        out.println();
-    }
-
-    public void printMaxWageEmployeeInfo() {
-        out.print("Сотрудник с максимальной зарплатой:\n\t");
-        out.println(findMaxWageEmployee());
-        out.println();
-    }
-
-    public void printMinWageEmployeeInfo() {
-        out.print("Сотрудник с минимальной зарплатой:\n\t");
-        out.println(findMinWageEmployee());
-        out.println();
-    }
-
-    public void printMonthlyPayroll() {
-        out.println("Cумма затрат на зарплаты в компании за месяц составляет "
-                + Employee.formatSalary(calcMonthlyPayroll()));
-        out.println();
-    }
-
-    public void printMonthlyPayrollInDepartment(int departmentId) {
-        out.println("Cумма затрат на зарплаты в " + departmentId + "-м отделе за месяц составляет "
-                + Employee.formatSalary(calcMonthlyPayrollInDepartment(departmentId)));
-        out.println();
-    }
-
-    public double calcAverageSalary() {
-        return (employees.size()== 0) ? 0 : calcMonthlyPayroll() / employees.size();
-
-    }
-
-    public Employee findMinWageEmployee() {
-        double minWage = Double.MAX_VALUE;
-        Employee employeeWithMinWage = null;
-        for (Employee employee : employees.values()) {
-            if (employee != null && minWage > employee.salary()) {
-                minWage = employee.salary();
-                employeeWithMinWage = employee;
-            }
-        }
-        return employeeWithMinWage;
-    }
-
+    @Override
     public Employee findMaxWageEmployee() {
         double maxWage = Double.MIN_VALUE;
         Employee employeeWithMaxWage = null;
@@ -293,34 +189,48 @@ public class EmployeeBookServiceImpl implements EmployeesBookService{
         return employeeWithMaxWage;
     }
 
-    public double calcMonthlyPayrollInDepartment(int departmentId) {
+    @Override
+    public Employee findMinWageEmployee() {
+        double minWage = Double.MAX_VALUE;
+        Employee employeeWithMinWage = null;
+        for (Employee employee : employees.values()) {
+            if (employee != null && minWage > employee.salary()) {
+                minWage = employee.salary();
+                employeeWithMinWage = employee;
+            }
+        }
+        return employeeWithMinWage;
+    }
+
+    @Override
+    public String calculateMonthlyPayroll() {
+        return Employee.formatSalary(calculateMonthlyPayrollAsNumber());
+    }
+
+    private double calculateMonthlyPayrollAsNumber() {
+        double sum = 0;
+        for (Employee employee : employees.values()) {
+            sum += employee.salary();
+        }
+        return sum;
+    }
+
+    @Override
+    public String calculateAverageSalary() {
+        return Employee.formatSalary((employees.size() == 0) ? 0 : calculateMonthlyPayrollAsNumber() / employees.size());
+    }
+
+    @Override
+    public String calculateMonthlyPayrollInDepartment(int departmentId) {
         checkDepartmentId(departmentId);
         double sum = 0;
         for (Employee employee : employees.values()) {
-            if (employee != null && employee.getDepartmentId() == departmentId) {
+            if (employee.getDepartmentId() == departmentId) {
                 sum += employee.salary();
             }
         }
-        return sum;
+        return Employee.formatSalary(sum);
     }
 
-    public double calcMonthlyPayroll() {
-        double sum = 0;
-        for (Employee employee : employees.values()) {
-            if (employee != null) {
-                sum += employee.salary();
-            }
-        }
-        return sum;
-    }
 
-    public void printEmployeesList() {
-        out.println("\nСводка по сотрудникам:");
-        for (Employee employee : employees.values()) {
-            if (employee != null) {
-                out.println(employee);
-            }
-        }
-        out.println();
-    }
 }

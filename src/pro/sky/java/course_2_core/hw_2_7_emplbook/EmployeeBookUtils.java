@@ -9,16 +9,10 @@ import java.util.Random;
 
 public final class EmployeeBookUtils {
     public static final int DEPARTMENT_COUNT = 5;
-    public static final int EMPLOYEES_COUNT = 10;
     private static final Random random = new Random();
 
-    public static int generateRandomSalaryIndexingPercentage() {
-        int minPercentage = 10;
-        return minPercentage + random.nextInt(20);
-    }
-
     static double generateRandomSalary() {
-        return 230_000 + 8_000 * random.nextInt(8);
+        return 240_000 + 8_000 * random.nextInt(30);
     }
 
     static int generateRandomDepartmentId() {
@@ -52,7 +46,7 @@ public final class EmployeeBookUtils {
                 new EmployeeKey("Лев", "Ландау"),
                 new EmployeeKey("Сергей", "Рахманинов"),
                 new EmployeeKey("Павел", "Черенков"));
-        Map<String, Employee> employees = new HashMap();
+        Map<String, Employee> employees = new HashMap<>();
         for (EmployeeKey name : names) {
             employees.put(name.getKey(),
                     new Employee(name.getFirstName(),
