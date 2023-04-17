@@ -22,7 +22,7 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
     public void homework() {
         printTitle("Homework 2.5 \"Collections and Maps\"");
 
-        List numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
+        List<Integer> numbers = new ArrayList<>(List.of(1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
         printOddNumbers(numbers);
 
         numbers = new ArrayList<>(List.of(2, 1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
@@ -57,10 +57,9 @@ public class hw_2_5_CollectionsAndMaps implements Homework {
     private void printUniqueEvenNumbersSortedAscending(List<Integer> numbers) {
         printTaskHeader("Task #2: print to console only unique even numbers sorted ascending from a given sequence of numbers: ");
         System.out.println("numbers = " + numbers);
-        Collections.sort(numbers);
-        System.out.println("sorted numbers = " + numbers);
-        Set<Integer> set = new HashSet<>(numbers);
-        System.out.print("All the unique even numbers = [");
+        TreeSet<Integer> set = new TreeSet<>(numbers);
+        System.out.println("sorted and unique numbers (converted in a form of class TreeSet<Integer> = " + set);
+        System.out.print("even numbers out there are: [");
         boolean found = false;
         for (int k : set) {
             if (k % 2 == 0) {

@@ -29,29 +29,27 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        if (employees.containsKey(employee.key())) {
-            throw new EmployeeAlreadyAddedException();
+        if (employees.containsKey(employee.getKey())) {
+            throw new EmployeeAlreadyAddedException(employee);
         }
-        employees.put(employee.key(), employee);
+        employees.put(employee.getKey(), employee);
         return employee;
     }
 
     @Override
     public Employee removeEmployee(Employee employee) {
-        final String key = employee.key();
-        final Employee employeeToRemove = employees.get(key);
-        if (employeeToRemove == null) {
-            throw new EmployeeNotFoundException();
+        final String key = employee.getKey();
+        if (employees.get(key) == null) {
+            throw new EmployeeNotFoundException(employee);
         }
-        employees.remove(key);
-        return employeeToRemove;
+        return employees.remove(key);
     }
 
     @Override
     public Employee findEmployee(Employee employee) {
-        final Employee foundEmployee = employees.get(employee.key());
+        final Employee foundEmployee = employees.get(employee.getKey());
         if (foundEmployee == null) {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException(employee);
         }
         return foundEmployee;
     }
@@ -63,9 +61,9 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
 
     @Override
     public Employee setSalary(Employee employee, int newSalary) {
-        Employee employeeToUpdate = employees.get(employee.key());
+        Employee employeeToUpdate = employees.get(employee.getKey());
         if (employeeToUpdate == null) {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException(employee);
         }
         employeeToUpdate.setSalary(newSalary);
         return employeeToUpdate;
@@ -74,9 +72,9 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     @Override
     public Employee setDepartment(Employee employee, int newDepartmentId) {
         checkDepartmentId(newDepartmentId);
-        Employee employeeToUpdate = employees.get(employee.key());
+        Employee employeeToUpdate = employees.get(employee.getKey());
         if (employeeToUpdate == null) {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException(employee);
         }
         employeeToUpdate.setDepartmentId(newDepartmentId);
         return employeeToUpdate;

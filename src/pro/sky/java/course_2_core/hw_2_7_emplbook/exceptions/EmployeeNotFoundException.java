@@ -1,11 +1,14 @@
 package pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class EmployeeNotFoundException extends RuntimeException {
-    public EmployeeNotFoundException() {
-        super();
+public class EmployeeNotFoundException extends EmployeeException {
+    public EmployeeNotFoundException(Employee employee) {
+        super(employee);
+    }
+
+    @Override
+    public String getMessage() {
+        return "Employee with the name " + getEmployeeName() + " is not listed in the register.";
     }
 }

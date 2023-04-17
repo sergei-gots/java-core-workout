@@ -94,7 +94,8 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String key() {
+    @JsonIgnore
+    public String getKey() {
         return firstName + lastName;
     }
 }
