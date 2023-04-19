@@ -1,13 +1,13 @@
-package pro.sky.java.course_2_core.hw_2_7_emplbook;
+package pro.sky.java.course_2_core.employee;
 
-import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
+import pro.sky.java.course_2_core.employee.model.Employee;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public final class EmployeeBookUtils {
+public final class EmployeeUtils {
     public static final int DEPARTMENT_COUNT = 5;
     private static final Random random = new Random();
 

@@ -1,16 +1,16 @@
 package pro.sky.java.course_2_core.hw_2_8_emplbook.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions.*;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
+import pro.sky.java.course_2_core.employee.EmployeeUtils;
+import pro.sky.java.course_2_core.employee.exceptions.*;
+import pro.sky.java.course_2_core.employee.model.Employee;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils.DEPARTMENT_COUNT;
+import static pro.sky.java.course_2_core.employee.EmployeeUtils.DEPARTMENT_COUNT;
 
 @Service
 public class EmployeeBookServiceImpl implements EmployeesBookService {
@@ -18,7 +18,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     private final Map<String, Employee> employees;
 
     public EmployeeBookServiceImpl() {
-        employees = EmployeeBookUtils.generateEmployees();
+        employees = EmployeeUtils.generateEmployees();
     }
 
     private static void checkDepartmentId(int departmentId) {
@@ -231,7 +231,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     }
 
     @Override
-    public Collection<Employee> getEmployeesByDepartment() {
+    public Collection<Employee> getEmployeesByDepartment(int departmentId) {
         return null;
     }
 

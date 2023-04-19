@@ -3,7 +3,7 @@ package pro.sky.java.course_2_core.hw_2_8_emplbook.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
+import pro.sky.java.course_2_core.employee.model.Employee;
 import pro.sky.java.course_2_core.hw_2_8_emplbook.service.EmployeesBookService;
 
 
@@ -39,7 +39,7 @@ public class DepartmentsController {
      **/
     @GetMapping("/all")
     Collection<Employee> getEmployeesByDepartment(int departmentId) {
-        return service.getEmployeesByDepartment();
+        return service.getEmployeesByDepartment(departmentId);
     }
 
 

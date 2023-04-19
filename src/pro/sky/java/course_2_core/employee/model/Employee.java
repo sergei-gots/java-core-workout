@@ -1,4 +1,4 @@
-package pro.sky.java.course_2_core.hw_2_7_emplbook.model;
+package pro.sky.java.course_2_core.employee.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

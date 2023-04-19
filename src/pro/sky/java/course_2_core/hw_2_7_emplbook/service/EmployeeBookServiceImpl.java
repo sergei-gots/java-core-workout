@@ -1,16 +1,16 @@
 package pro.sky.java.course_2_core.hw_2_7_emplbook.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions.EmployeeAlreadyAddedException;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions.EmployeeNotFoundException;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
-import pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils;
+import pro.sky.java.course_2_core.employee.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.java.course_2_core.employee.exceptions.EmployeeNotFoundException;
+import pro.sky.java.course_2_core.employee.model.Employee;
+import pro.sky.java.course_2_core.employee.EmployeeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static pro.sky.java.course_2_core.hw_2_7_emplbook.EmployeeBookUtils.*;
+import static pro.sky.java.course_2_core.employee.EmployeeUtils.*;
 
 @Service
 public class EmployeeBookServiceImpl implements EmployeesBookService {
@@ -18,7 +18,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     private final Map<String, Employee> employees;
 
     public EmployeeBookServiceImpl() {
-        employees = EmployeeBookUtils.generateEmployees();
+        employees = EmployeeUtils.generateEmployees();
     }
 
     private static void checkDepartmentId(int departmentId) {
