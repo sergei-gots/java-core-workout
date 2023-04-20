@@ -126,7 +126,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         return formatSalary(employees.values()
                 .stream()
                 .filter(e->e.getDepartmentId()==departmentId)
-                .mapToDouble(e->e.getSalary()).average().getAsDouble()
+                .mapToDouble(Employee::getSalary).average().orElse(0)
         );
     }
 
@@ -157,7 +157,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         return employees.values()
                 .stream()
                 .max(new SalaryComparator<>())
-                .get();
+                .orElse(null);
     }
 
     @Override
@@ -188,7 +188,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
         return Employee.formatSalary(
                 employees.values().stream()
                         .filter(e->e.getDepartmentId()==departmentId)
-                        .mapToDouble(e->e.getSalary())
+                        .mapToDouble(Employee::getSalary)
                         .sum()
         );
     }
@@ -206,6 +206,12 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
 class SalaryComparator<T> implements Comparator<Employee> {
     @Override
     public int compare(Employee e1, Employee e2) {
-        return (e1.getSalary()<e2.getSalary())? -1 : 1;
+        if (e1.getSalary()<e2.getSalary()) {
+            return -1;
+        } else if(e1.getSalary() > e2.getSalary()) {
+                return 1;
+        } else {
+            return 0;
+        }
     }
 }
