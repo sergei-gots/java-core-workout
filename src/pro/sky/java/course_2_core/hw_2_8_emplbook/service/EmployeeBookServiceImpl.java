@@ -174,7 +174,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     }
 
     private double calculateMonthlyPayrollAsNumber() {
-        return employees.values().stream().mapToDouble(e->e.getSalary()).sum();
+        return employees.values().stream().mapToDouble(Employee::getSalary).sum();
     }
 
     @Override
@@ -206,12 +206,6 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
 class SalaryComparator<T> implements Comparator<Employee> {
     @Override
     public int compare(Employee e1, Employee e2) {
-        if (e1.getSalary()<e2.getSalary()) {
-            return -1;
-        } else if(e1.getSalary() > e2.getSalary()) {
-                return 1;
-        } else {
-            return 0;
-        }
+        return Double.compare(e1.getSalary(), e2.getSalary());
     }
 }
