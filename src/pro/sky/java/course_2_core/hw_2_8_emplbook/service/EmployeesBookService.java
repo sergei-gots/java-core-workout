@@ -16,9 +16,8 @@ public interface EmployeesBookService {
 
     String calculateAverageSalary();
 
-    String calculateMonthlyPayroll();
 
-    Employee findMinWageEmployee();
+    String calculateMonthlyPayroll();
 
     Employee setSalary(Employee employee, int newSalary);
 
@@ -26,23 +25,25 @@ public interface EmployeesBookService {
 
     List<Employee> findEmployeesWithSalaryGreaterOrEqualTo(int targetSalary);
 
-    List<Employee> findEmployeesWithSalaryLessThan(double targetSalary);
+    Collection<Employee> findEmployeesWithSalaryLessThan(double targetSalary);
 
-    List<Employee> findEmployeesByDepartment(int departmentId);
+    Collection<Employee> findEmployeesByDepartment(int departmentId);
 
-    List<Employee> indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage);
+    Collection<Employee> indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage);
 
-    List<Employee> indexSalary(int salaryIndexationPercentage);
+    Collection<Employee> indexSalary(int salaryIndexationPercentage);
 
     String calcAverageSalaryInDepartment(int departmentId);
 
-    Employee findMaxPaidEmployeeInDepartment(int departmentId);
+    Employee findMaxSalaryEmployeeInDepartment(int departmentId);
 
-    Employee findMinPaidEmployeeInDepartment(int departmentId);
+    Employee findMinSalaryEmployeeInDepartment(int departmentId);
 
-    Employee findMaxWageEmployee();
+    Employee findMaxSalaryEmployee();
+
+    Employee findMinSalaryEmployee();
 
     String calculateMonthlyPayrollInDepartment(int departmentId);
 
-    Collection<Employee> getEmployeesByDepartment(int departmentId);
+    Collection<Employee> getAllEmployeesByDepartments();
 }

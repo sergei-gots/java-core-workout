@@ -4,11 +4,10 @@ import org.springframework.stereotype.Service;
 import pro.sky.java.course_2_core.employee.EmployeeUtils;
 import pro.sky.java.course_2_core.employee.exceptions.*;
 import pro.sky.java.course_2_core.employee.model.Employee;
+import static pro.sky.java.course_2_core.employee.model.Employee.formatSalary;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static pro.sky.java.course_2_core.employee.EmployeeUtils.DEPARTMENT_COUNT;
 
@@ -73,7 +72,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     public Employee setDepartment(Employee employee, int newDepartmentId) {
         checkDepartmentId(newDepartmentId);
         Employee employeeToUpdate = employees.get(employee.getKey());
-        if (employeeToUpdate == null) {
+        if(employeeToUpdate == null) {
             throw new EmployeeNotFoundException(employee);
         }
         employeeToUpdate.setDepartmentId(newDepartmentId);
@@ -82,122 +81,91 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
 
     @Override
     public List<Employee> findEmployeesWithSalaryGreaterOrEqualTo(int targetSalary) {
-        List<Employee> employeesTargetedSalary = new ArrayList<>();
-        for (Employee employee : employees.values()) {
-            if (employee.getSalary() >= targetSalary) {
-                employeesTargetedSalary.add(employee);
-            }
-        }
-        return employeesTargetedSalary;
+        return employees.values().stream()
+                .filter(e -> e.getSalary() >= targetSalary)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+
+
+    @Override
+    public Collection<Employee> findEmployeesWithSalaryLessThan(double targetSalary) {
+        return employees.values().stream()
+                .filter(e -> e.getSalary() < targetSalary)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
-    public List<Employee> findEmployeesWithSalaryLessThan(double targetSalary) {
-        List<Employee> employeesTargetedSalary = new ArrayList<>();
-        for (Employee employee : employees.values()) {
-            if (employee.getSalary() < targetSalary) {
-                employeesTargetedSalary.add(employee);
-            }
-        }
-        return employeesTargetedSalary;
-    }
-
-    @Override
-    public List<Employee> findEmployeesByDepartment(int departmentId) {
-        List<Employee> employeesInDepartment = new ArrayList<>();
+    public Collection<Employee> findEmployeesByDepartment(int departmentId) {
         checkDepartmentId(departmentId);
-        for (Employee employee : employees.values()) {
-            if (departmentId == employee.getDepartmentId()) {
-                employeesInDepartment.add(employee);
-            }
-        }
-        return employeesInDepartment;
+        return employees.values().stream()
+                .filter(e->e.getDepartmentId()==departmentId)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
-    public List<Employee> indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage) {
-        List<Employee> employeesInDepartment = findEmployeesByDepartment(departmentId);
+    public Collection<Employee> indexSalaryInDepartment(int departmentId, int salaryIndexationPercentage) {
+        Collection<Employee> departmentEmployeesCollection = findEmployeesByDepartment(departmentId);
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
-        for (Employee employee : employees.values()) {
-            employee.setSalary(employee.getSalary() * salaryMultiplier);
-        }
-        return employeesInDepartment;
+        departmentEmployeesCollection
+                .forEach(e -> e.setSalary(e.getSalary() * salaryMultiplier));
+        return departmentEmployeesCollection;
     }
 
     @Override
-    public List<Employee> indexSalary(int salaryIndexationPercentage) {
+    public Collection<Employee> indexSalary(int salaryIndexationPercentage) {
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
-        for (Employee employee : employees.values()) {
-            employee.setSalary(employee.getSalary() * salaryMultiplier);
-        }
-        return getList();
+        Collection<Employee> employeesCollection = employees.values();
+        employeesCollection.forEach(e -> e.setSalary(e.getSalary() * salaryMultiplier));
+        return employeesCollection;
     }
 
     @Override
     public String calcAverageSalaryInDepartment(int departmentId) {
-        double sum = 0;
-        int count = 0;
         checkDepartmentId(departmentId);
+        return formatSalary(employees.values()
+                .stream()
+                .filter(e->e.getDepartmentId()==departmentId)
+                .mapToDouble(e->e.getSalary()).average().getAsDouble()
+        );
+    }
 
-        for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId) {
-                count++;
-                sum += employee.getSalary();
-            }
-        }
-        return Employee.formatSalary((count == 0) ? 0 : (sum / count));
+
+    @Override
+    public Employee findMaxSalaryEmployeeInDepartment(int departmentId) {
+        checkDepartmentId(departmentId);
+        return employees.values()
+                .stream()
+                .filter(e->e.getDepartmentId()==departmentId)
+                .max(new SalaryComparator<>())
+                .orElse(null);
+
     }
 
     @Override
-    public Employee findMaxPaidEmployeeInDepartment(int departmentId) {
-        double maxWage = Double.MIN_VALUE;
-        Employee employeeWithMaxWage = null;
-        for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId && employee.getSalary() > maxWage) {
-                maxWage = employee.getSalary();
-                employeeWithMaxWage = employee;
-            }
-        }
-        return employeeWithMaxWage;
+    public Employee findMinSalaryEmployeeInDepartment(int departmentId) {
+        checkDepartmentId(departmentId);
+        return employees.values()
+                .stream()
+                .filter(e->e.getDepartmentId()==departmentId)
+                .min(new SalaryComparator<>())
+                .orElse(null);
     }
 
     @Override
-    public Employee findMinPaidEmployeeInDepartment(int departmentId) {
-        double minWage = Double.MAX_VALUE;
-        Employee employeeWithMinWage = null;
-        for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId && employee.getSalary() < minWage) {
-                minWage = employee.getSalary();
-                employeeWithMinWage = employee;
-            }
-        }
-        return employeeWithMinWage;
+    public Employee findMaxSalaryEmployee() {
+        return employees.values()
+                .stream()
+                .max(new SalaryComparator<>())
+                .get();
     }
 
     @Override
-    public Employee findMaxWageEmployee() {
-        double maxWage = Double.MIN_VALUE;
-        Employee employeeWithMaxWage = null;
-        for (Employee employee : employees.values()) {
-            if (employee != null && maxWage < employee.getSalary()) {
-                maxWage = employee.getSalary();
-                employeeWithMaxWage = employee;
-            }
-        }
-        return employeeWithMaxWage;
-    }
-
-    @Override
-    public Employee findMinWageEmployee() {
-        double minWage = Double.MAX_VALUE;
-        Employee employeeWithMinWage = null;
-        for (Employee employee : employees.values()) {
-            if (minWage > employee.getSalary()) {
-                minWage = employee.getSalary();
-                employeeWithMinWage = employee;
-            }
-        }
-        return employeeWithMinWage;
+    public Employee findMinSalaryEmployee() {
+        return employees.values()
+                .stream()
+                .min(new SalaryComparator<>())
+                .orElse(null);
     }
 
     @Override
@@ -206,11 +174,7 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     }
 
     private double calculateMonthlyPayrollAsNumber() {
-        double sum = 0;
-        for (Employee employee : employees.values()) {
-            sum += employee.getSalary();
-        }
-        return sum;
+        return employees.values().stream().mapToDouble(e->e.getSalary()).sum();
     }
 
     @Override
@@ -221,19 +185,27 @@ public class EmployeeBookServiceImpl implements EmployeesBookService {
     @Override
     public String calculateMonthlyPayrollInDepartment(int departmentId) {
         checkDepartmentId(departmentId);
-        double sum = 0;
-        for (Employee employee : employees.values()) {
-            if (employee.getDepartmentId() == departmentId) {
-                sum += employee.getSalary();
-            }
-        }
-        return Employee.formatSalary(sum);
+        return Employee.formatSalary(
+                employees.values().stream()
+                        .filter(e->e.getDepartmentId()==departmentId)
+                        .mapToDouble(e->e.getSalary())
+                        .sum()
+        );
     }
 
     @Override
-    public Collection<Employee> getEmployeesByDepartment(int departmentId) {
-        return null;
+    public Collection<Employee> getAllEmployeesByDepartments() {
+        return employees.values()
+                .stream()
+                .sorted((employee1, employee2) -> employee1.getDepartmentId() >= employee2.getDepartmentId() ? 1 : -1)
+                .collect(Collectors.toList());
     }
 
+}
 
+class SalaryComparator<T> implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        return (e1.getSalary()<e2.getSalary())? -1 : 1;
+    }
 }

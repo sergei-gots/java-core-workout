@@ -1,0 +1,153 @@
+###
+GET http://localhost:8080/departments/max-salary?departmentId=5
+###
+GET http://localhost:8080/departments//min-salary?departmentId=5
+
+
+###
+GET http://localhost:8080/departments/all?departmentId=5
+
+###
+GET http://localhost:8080/departments/all
+
+
+###
+GET http://localhost:8080/employees-book/add-employee?firstName=Sergei&lastName=Gots&departmentId=5&salary=370000
+
+<> 2023-04-16T183144.200.json
+<> 2023-04-16T182308.200.json
+###
+GET http://localhost:8080/employees-book/list
+
+<> 2023-04-16T183242.200.json
+<> 2023-04-16T183159.200.json
+<> 2023-04-16T183148.200.json
+<> 2023-04-16T182730.200.json
+
+###
+GET http://localhost:8080/employees-book/find-employee?firstName=Сергей&lastName=Рахманинов
+
+<> 2023-04-16T182156.200.json
+
+
+###
+GET http://localhost:8080/employees-book/remove-employee?firstName=Афанасий&lastName=Никитин
+
+
+###
+GET http://localhost:8080/employees-book/company-average-salary
+
+<> 2023-04-16T183210.200.txt
+<> 2023-04-16T182324.200.txt
+<> 2023-04-16T182202.200.txt
+
+###
+GET http://localhost:8080/employees-book/company-monthly-payroll
+
+<> 2023-04-16T183214.200.txt
+<> 2023-04-16T182329.200.txt
+<> 2023-04-16T182303.200.txt
+<> 2023-04-16T182217.200.txt
+
+###
+GET http://localhost:8080/employees-book/company-min-salary-employee
+
+<> 2023-04-16T182234.200.json
+
+###
+GET http://localhost:8080/employees-book/company-max-salary-employee
+
+<> 2023-04-16T183229.200.json
+<> 2023-04-16T183220.200.json
+<> 2023-04-16T182237.200.json
+
+###
+GET http://localhost:8080/employees-book/assign-salary?firstName=Иван&lastName=Павлов&salary=790000
+
+GET http://localhost:8080/employees-book/assign-salary?firstName=Михаил&lastName=Глинка&salary=90000
+
+<> 2023-04-16T183226.200.json
+<> 2023-04-16T182258.200.json
+
+###
+GET http://localhost:8080/employees-book/assign-department?firstName=Михаил&lastName=Глинка&departmentId=1
+
+
+
+<> 2023-04-16T183255.200.json
+<> 2023-04-16T182841.200.json
+<> 2023-04-16T182837.200.json
+<> 2023-04-16T182746.200.json
+<> 2023-04-16T182458.404.json
+<> 2023-04-16T182336.404.json
+
+###
+GET http://localhost:8080/employees-book/employees-with-salary-greater-or-equal-to?salary=300000
+
+
+###
+GET http://localhost:8080/employees-book/employees-with-salary-less-than?salary=500000
+
+<> 2023-04-16T182753.200.json
+
+
+###
+GET http://localhost:8080/employees-book/employees-by-department?departmentId=1
+
+<> 2023-04-16T183319.200.json
+<> 2023-04-16T183306.200.json
+<> 2023-04-16T182826.200.json
+<> 2023-04-16T182720.200.json
+
+###
+GET http://localhost:8080/employees-book/index-salary-in-department?departmentId=1&percentage=20
+
+<> 2023-04-16T183326.200.json
+<> 2023-04-16T183316.200.json
+
+###
+GET http://localhost:8080/employees-book/index-salary-for-all?percentage=10
+
+<> 2023-04-16T183348.200.json
+<> 2023-04-16T183337.200.json
+
+###
+GET http://localhost:8080/employees-book/average-salary-in-department?departmentId=3
+
+<> 2023-04-16T183358.200.txt
+<> 2023-04-16T182708.200.txt
+
+###
+GET http://localhost:8080/employees-book/find-max-wage-employee-in-department?departmentId=1
+
+<> 2023-04-16T183404.200.json
+<> 2023-04-16T182819.200.json
+<> 2023-04-16T182805.200.json
+<> 2023-04-16T182658.200.json
+
+###
+GET http://localhost:8080/employees-book/find-min-wage-employee-in-department?departmentId=1
+
+<> 2023-04-16T183409.200.json
+<> 2023-04-16T182810.200.json
+<> 2023-04-16T182653.200.json
+
+###
+GET http://localhost:8080/employees-book/find-max-wage-employee
+
+GET http://localhost:8080/employees-book/find-min-wage-employee
+
+<> 2023-04-16T183415.200.json
+<> 2023-04-16T182648.200.json
+
+###
+GET http://localhost:8080/employees-book/monthly-payroll-in-department?departmentId=1
+
+<> 2023-04-16T183419.200.txt
+<> 2023-04-16T182641.200.txt
+
+###
+GET http://localhost:8080/employees-book/assign-department?firstName=Михаил&lastName=Глинка&departmentId=10
+
+<> 2023-04-16T183422.500.json
+<> 2023-04-16T182615.500.json

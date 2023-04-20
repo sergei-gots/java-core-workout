@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course_2_core.employee.model.Employee;
 import pro.sky.java.course_2_core.hw_2_8_emplbook.service.EmployeesBookService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -47,14 +48,14 @@ public class EmployeesBookController {
         return employeesBookService.calculateMonthlyPayroll();
     }
 
-    @GetMapping("/company-min-wage-employee")
-    public Employee getCompanyMinWageEmployee() {
-        return employeesBookService.findMinWageEmployee();
+    @GetMapping("/company-min-salary-employee")
+    public Employee getCompanyMinSalaryEmployee() {
+        return employeesBookService.findMinSalaryEmployee();
     }
 
-    @GetMapping("/company-max-wage-employee")
-    public Employee getCompanyMaxWageEmployee() {
-        return employeesBookService.findMaxWageEmployee();
+    @GetMapping("/company-max-salary-employee")
+    public Employee getCompanyMaxSalaryEmployee() {
+        return employeesBookService.findMaxSalaryEmployee();
     }
 
     @GetMapping("/assign-salary")
@@ -73,22 +74,22 @@ public class EmployeesBookController {
     }
 
     @GetMapping("/employees-with-salary-less-than")
-    public List<Employee>  findEmployeesWithSalaryGreaterOrEqualTot(int salary) {
+    public Collection<Employee>  findEmployeesWithSalaryGreaterOrEqualTot(int salary) {
         return employeesBookService.findEmployeesWithSalaryLessThan(salary);
     }
 
     @GetMapping("/employees-by-department")
-    public List<Employee> findEmployeesByDepartment(int departmentId) {
+    public Collection<Employee> findEmployeesByDepartment(int departmentId) {
         return employeesBookService.findEmployeesByDepartment(departmentId);
     }
 
     @GetMapping("/index-salary-in-department")
-    public List<Employee> indexSalaryInDepartment(int departmentId, int percentage) {
+    public Collection<Employee> indexSalaryInDepartment(int departmentId, int percentage) {
         return employeesBookService.indexSalaryInDepartment(departmentId, percentage);
     }
 
     @GetMapping("/index-salary-for-all")
-    public List<Employee> indexSalaryInDepartment(int percentage) {
+    public Collection<Employee> indexSalaryInDepartment(int percentage) {
         return employeesBookService.indexSalary(percentage);
     }
 
@@ -97,24 +98,24 @@ public class EmployeesBookController {
         return employeesBookService.calcAverageSalaryInDepartment(departmentId);
     }
 
-    @GetMapping("/find-max-wage-employee-in-department")
-    public Employee findMaxWageEmployeeInDepartment(int departmentId) {
-        return employeesBookService.findMaxPaidEmployeeInDepartment(departmentId);
+    @GetMapping("/find-max-salary-employee-in-department")
+    public Employee findMaxSalaryEmployeeInDepartment(int departmentId) {
+        return employeesBookService.findMaxSalaryEmployeeInDepartment(departmentId);
     }
 
-    @GetMapping("/find-min-wage-employee-in-department")
-    public Employee findMinWageEmployeeInDepartment(int departmentId) {
-        return employeesBookService.findMinPaidEmployeeInDepartment(departmentId);
+    @GetMapping("/find-min-salary-employee-in-department")
+    public Employee findMinSalaryEmployeeInDepartment(int departmentId) {
+        return employeesBookService.findMinSalaryEmployeeInDepartment(departmentId);
     }
 
-    @GetMapping("/find-max-wage-employee")
-    public Employee findMaxWageEmployee() {
-        return employeesBookService.findMaxWageEmployee();
+    @GetMapping("/find-max-salary-employee")
+    public Employee findMaxSalaryEmployee() {
+        return employeesBookService.findMaxSalaryEmployee();
     }
 
-    @GetMapping("/find-min-wage-employee")
-    public Employee findMinWageEmployee() {
-        return employeesBookService.findMinWageEmployee();
+    @GetMapping("/find-min-Salary-employee")
+    public Employee findMinSalaryEmployee() {
+        return employeesBookService.findMinSalaryEmployee();
     }
 
     @GetMapping("/monthly-payroll-in-department")
