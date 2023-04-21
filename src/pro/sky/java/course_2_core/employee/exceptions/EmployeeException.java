@@ -1,6 +1,6 @@
-package pro.sky.java.course_2_core.hw_2_7_emplbook.exceptions;
+package pro.sky.java.course_2_core.employee.exceptions;
 
-import pro.sky.java.course_2_core.hw_2_7_emplbook.model.Employee;
+import pro.sky.java.course_2_core.employee.model.Employee;
 
 public abstract class EmployeeException extends RuntimeException {
     private final Employee employee;
