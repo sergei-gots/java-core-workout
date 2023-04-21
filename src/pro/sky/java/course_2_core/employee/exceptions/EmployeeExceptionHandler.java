@@ -20,4 +20,11 @@ public class EmployeeExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
+    @ExceptionHandler(IllegalNameException.class)
+    public ResponseEntity<String> illegalNameExceptionHandler(@NotNull IllegalNameException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+
+    }
+
 }
