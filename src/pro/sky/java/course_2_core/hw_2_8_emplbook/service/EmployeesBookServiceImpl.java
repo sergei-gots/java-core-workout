@@ -1,5 +1,6 @@
 package pro.sky.java.course_2_core.hw_2_8_emplbook.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course_2_core.employee.exceptions.*;
 import pro.sky.java.course_2_core.employee.model.Employee;
@@ -10,11 +11,12 @@ import java.util.stream.Collectors;
 import static pro.sky.java.course_2_core.employee.EmployeeUtils.checkDepartmentId;
 
 @Service
-public class EmployeeBookServiceImpl  extends DepartmentsServiceImplAbstract
+@Component("EmployeesBookService")
+public class EmployeesBookServiceImpl extends DepartmentsServiceImpl
         implements EmployeesBookService {
 
-    public EmployeeBookServiceImpl() {
-        initEmployees();
+    public EmployeesBookServiceImpl() {
+        super();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package pro.sky.java.course_2_core.hw_2_8_emplbook.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees-book")
 public class EmployeesBookController {
+
     final private EmployeesBookService service;
 
-    public EmployeesBookController(EmployeesBookService service) {
-        this.service = service;
+    public EmployeesBookController(@Qualifier("EmployeesBookService") EmployeesBookService service) {
+      this.service = service;
     }
 
     @GetMapping("/add-employee")

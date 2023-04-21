@@ -5,7 +5,7 @@ import pro.sky.java.course_2_core.employee.model.Employee;
 import java.util.Collection;
 import java.util.List;
 
-public interface EmployeesBookService extends DepartmentsServiceAbstract {
+public interface EmployeesBookService extends DepartmentsService {
     Employee addEmployee(Employee employee);
 
     Employee removeEmployee(Employee employee);
