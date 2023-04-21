@@ -126,14 +126,14 @@ GET http://localhost:8080/employees-book/find-max-wage-employee-in-department?de
 <> 2023-04-16T182658.200.json
 
 ###
-GET http://localhost:8080/employees-book/find-min-wage-employee-in-department?departmentId=1
+GET http://localhost:8080/employees-book/find-min-salary-employee-in-department?departmentId=1
 
 <> 2023-04-16T183409.200.json
 <> 2023-04-16T182810.200.json
 <> 2023-04-16T182653.200.json
 
 ###
-GET http://localhost:8080/employees-book/find-max-wage-employee
+GET http://localhost:8080/employees-book/find-max-salary-employee
 
 GET http://localhost:8080/employees-book/find-min-wage-employee
 

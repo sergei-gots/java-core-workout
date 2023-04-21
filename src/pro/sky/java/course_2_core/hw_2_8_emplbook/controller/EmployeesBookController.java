@@ -12,114 +12,114 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees-book")
 public class EmployeesBookController {
-    final private EmployeesBookService employeesBookService;
+    final private EmployeesBookService service;
 
-    public EmployeesBookController(EmployeesBookService employeesBookService) {
-        this.employeesBookService = employeesBookService;
+    public EmployeesBookController(EmployeesBookService service) {
+        this.service = service;
     }
 
     @GetMapping("/add-employee")
     public Employee addEmployee(String firstName, String lastName, int departmentId, int salary) {
-        return employeesBookService.addEmployee(new Employee(firstName, lastName, departmentId, salary));
+        return service.addEmployee(new Employee(firstName, lastName, departmentId, salary));
     }
 
     @GetMapping("/remove-employee")
     public Employee removeEmployee(String firstName, String lastName){
-        return employeesBookService.removeEmployee(new Employee(firstName, lastName));
+        return service.removeEmployee(new Employee(firstName, lastName));
     }
 
     @GetMapping("/find-employee")
     public Employee findEmployee(String firstName, String lastName) {
-        return employeesBookService.findEmployee(new Employee(firstName, lastName));
+        return service.findEmployee(new Employee(firstName, lastName));
     }
 
     @GetMapping("/list")
-    public List<Employee> getEmployeesList() {
-        return employeesBookService.getList();
+    public Collection<Employee> getAllEmployees() {
+        return service.getAllEmployees();
     }
 
     @GetMapping("/company-average-salary")
     public String getCompanyAverageSalary() {
-        return employeesBookService.calculateAverageSalary();
+        return service.calculateAverageSalary();
     }
 
     @GetMapping("/company-monthly-payroll")
     public String getCompanyMonthlyPayroll() {
-        return employeesBookService.calculateMonthlyPayroll();
+        return service.calculateMonthlyPayroll();
     }
 
     @GetMapping("/company-min-salary-employee")
     public Employee getCompanyMinSalaryEmployee() {
-        return employeesBookService.findMinSalaryEmployee();
+        return service.findMinSalaryEmployee();
     }
 
     @GetMapping("/company-max-salary-employee")
     public Employee getCompanyMaxSalaryEmployee() {
-        return employeesBookService.findMaxSalaryEmployee();
+        return service.findMaxSalaryEmployee();
     }
 
     @GetMapping("/assign-salary")
     public Employee assignSalary(String firstName, String lastName, int salary) {
-        return employeesBookService.setSalary(new Employee(firstName, lastName), salary);
+        return service.setSalary(new Employee(firstName, lastName), salary);
     }
 
     @GetMapping("/assign-department")
     public Employee assignDepartment(String firstName, String lastName, int departmentId) {
-        return employeesBookService.setDepartment(new Employee(firstName, lastName), departmentId);
+        return service.setDepartment(new Employee(firstName, lastName), departmentId);
     }
 
     @GetMapping("/employees-with-salary-greater-or-equal-to")
     public List<Employee>  findEmployeesWithSalaryGreaterOrEqualTo(int salary) {
-        return employeesBookService.findEmployeesWithSalaryGreaterOrEqualTo(salary);
+        return service.findEmployeesWithSalaryGreaterOrEqualTo(salary);
     }
 
     @GetMapping("/employees-with-salary-less-than")
     public Collection<Employee>  findEmployeesWithSalaryGreaterOrEqualTot(int salary) {
-        return employeesBookService.findEmployeesWithSalaryLessThan(salary);
+        return service.findEmployeesWithSalaryLessThan(salary);
     }
 
     @GetMapping("/employees-by-department")
     public Collection<Employee> findEmployeesByDepartment(int departmentId) {
-        return employeesBookService.findEmployeesByDepartment(departmentId);
+        return service.findEmployeesByDepartment(departmentId);
     }
 
     @GetMapping("/index-salary-in-department")
     public Collection<Employee> indexSalaryInDepartment(int departmentId, int percentage) {
-        return employeesBookService.indexSalaryInDepartment(departmentId, percentage);
+        return service.indexSalaryInDepartment(departmentId, percentage);
     }
 
     @GetMapping("/index-salary-for-all")
     public Collection<Employee> indexSalaryInDepartment(int percentage) {
-        return employeesBookService.indexSalary(percentage);
+        return service.indexSalary(percentage);
     }
 
     @GetMapping("/average-salary-in-department")
     public String calcAverageSalaryInDepartment(int departmentId) {
-        return employeesBookService.calcAverageSalaryInDepartment(departmentId);
+        return service.calcAverageSalaryInDepartment(departmentId);
     }
 
     @GetMapping("/find-max-salary-employee-in-department")
     public Employee findMaxSalaryEmployeeInDepartment(int departmentId) {
-        return employeesBookService.findMaxSalaryEmployeeInDepartment(departmentId);
+        return service.findMaxSalaryEmployeeInDepartment(departmentId);
     }
 
     @GetMapping("/find-min-salary-employee-in-department")
     public Employee findMinSalaryEmployeeInDepartment(int departmentId) {
-        return employeesBookService.findMinSalaryEmployeeInDepartment(departmentId);
+        return service.findMinSalaryEmployeeInDepartment(departmentId);
     }
 
     @GetMapping("/find-max-salary-employee")
     public Employee findMaxSalaryEmployee() {
-        return employeesBookService.findMaxSalaryEmployee();
+        return service.findMaxSalaryEmployee();
     }
 
     @GetMapping("/find-min-Salary-employee")
     public Employee findMinSalaryEmployee() {
-        return employeesBookService.findMinSalaryEmployee();
+        return service.findMinSalaryEmployee();
     }
 
     @GetMapping("/monthly-payroll-in-department")
     public String calculateMonthlyPayrollInDepartment(int departmentId) {
-        return employeesBookService.calculateMonthlyPayrollInDepartment(departmentId);
+        return service.calculateMonthlyPayrollInDepartment(departmentId);
     }
 }

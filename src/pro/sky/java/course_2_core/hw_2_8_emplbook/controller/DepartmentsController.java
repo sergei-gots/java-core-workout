@@ -2,7 +2,7 @@ package pro.sky.java.course_2_core.hw_2_8_emplbook.controller;
 
 import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course_2_core.employee.model.Employee;
-import pro.sky.java.course_2_core.hw_2_8_emplbook.service.EmployeesBookService;
+import pro.sky.java.course_2_core.hw_2_8_emplbook.service.DepartmentsService;
 
 
 import java.util.Collection;
@@ -10,10 +10,10 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/departments")
 public class DepartmentsController {
-    final private EmployeesBookService service;
+    final private DepartmentsService service;
 
-    public DepartmentsController(EmployeesBookService employeesBookService) {
-        this.service = employeesBookService;
+    public DepartmentsController(DepartmentsService service) {
+        this.service = service;
     }
 
     /**
@@ -44,7 +44,7 @@ public class DepartmentsController {
 
     @GetMapping("/all-by-departments")
     Collection<Employee> getAllEmployeesByDepartments() {
-        return service.getList();
+        return service.getAllEmployeesByDepartments();
     }
 
 
