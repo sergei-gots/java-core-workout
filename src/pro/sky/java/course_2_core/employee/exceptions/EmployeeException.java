@@ -15,4 +15,5 @@ public abstract class EmployeeException extends RuntimeException {
 
     @Override
     public abstract String getMessage();
+
 }

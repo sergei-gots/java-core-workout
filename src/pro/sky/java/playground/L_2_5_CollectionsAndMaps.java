@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.List;
 
 public class L_2_5_CollectionsAndMaps {
+
     public static void main(String[] args) {
         tip();
         lists();
