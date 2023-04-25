@@ -37,7 +37,6 @@ public class DepartmentsController {
 
     @GetMapping("/all")
     Collection<Employee> dispatchGetAllEmployees(@RequestParam(required = false) Integer departmentId) {
-        System.out.println("hello");
         if (departmentId == null) {
             return service.getAllEmployeesByDepartments();
         }

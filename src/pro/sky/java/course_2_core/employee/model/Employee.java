@@ -2,9 +2,12 @@ package pro.sky.java.course_2_core.employee.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
+import pro.sky.java.course_2_core.employee.exceptions.IllegalNameException;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
+
 
 /**
  * Class Employee, который содержит информацию о Ф.И.О.,
@@ -21,19 +24,24 @@ public class Employee {
     private int departmentId;
     private double salary;
 
-    public Employee(String firstName, String lastName, int departmentId, double salary) {
+    public Employee(String firstName, String lastName) {
         id = ++nextId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = validateName(firstName);
+        this.lastName = validateName(lastName);
+    }
+
+    public Employee(String firstName, String lastName, int departmentId, double salary) {
+        this(firstName, lastName);
         this.departmentId = departmentId;
         checkSalary(salary);
         this.salary = salary;
     }
 
-    public Employee(String firstName, String lastName) {
-        id = ++nextId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    String validateName(String name) {
+        if(!StringUtils.isAlpha(name)) {
+            throw new IllegalNameException(name);
+        }
+        return StringUtils.capitalize(name);
     }
 
     public static String formatSalary(double salary) {
