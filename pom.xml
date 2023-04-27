@@ -8,12 +8,12 @@
         <version>2.7.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>pro.sky.gots</groupId>
-    <artifactId>employees-register</artifactId>
+    <groupId>pro.sky.java</groupId>
+    <artifactId>springboot-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>employees-register</name>
-    <description>Register of Employees</description>
+    <name>spring-boot-example-application</name>
+    <description>sky-pro-java-development-core</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -44,6 +44,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>pro.sky.java.course_2_core.hw_2_11_store.StoreApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
