@@ -4,21 +4,50 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @Component
 @SessionScope
 public class Basket {
-    private List<Integer> ids;
+    private final Store store;
+    private final Map<Integer, BasketItem> items = new HashMap<>();
 
-    public Basket(List<Integer> ids) {
-        this.ids = ids;
+    public Basket(List<Integer> ids, Store store) {
+        this.store = store;
+        ids.forEach(id -> items.put(id, this.store.getItemForBasket(id)));
     }
 
-    public List<Integer> getIds() {
-        return ids;
+    public Map<Integer, BasketItem> getItems() {
+        return Map.copyOf(items);
     }
 
-    public void add(List<Integer> ids) {
-        this.ids.addAll(ids);
+    public void addIds(List<Integer> ids) {
+        ids.forEach(this::applyAdd);
     }
+
+    private void applyAdd(Integer id) {
+        if (items.containsKey(id)) {
+            items.get(id).increaseCount();
+        } else {
+            items.put(id, store.getItemForBasket(id));
+        }
+    }
+
+    public void remove(List<Integer> ids) {
+        ids.forEach(this::applyRemove);
+    }
+
+    private void applyRemove(Integer id) {
+        if (!items.containsKey(id)) {
+            return;
+        }
+        if (items.get(id).decreaseCount() == 0) {
+            items.remove(id);
+        }
+    }
+
 }
+
+
+

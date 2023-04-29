@@ -34,4 +34,12 @@ public class Store {
     public Item remove(int id) {
         return items.remove(id);
     }
+
+    public BasketItem getItemForBasket(int id) {
+        if(!items.containsKey(id)) {
+            throw new IllegalArgumentException("The product with the id=" + id
+                    + " is not listed in the store catalog.");
+        }
+        return new BasketItem(items.get(id));
+    }
 }
