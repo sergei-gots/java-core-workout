@@ -1,0 +1,24 @@
+###
+GET http://localhost:8080/store/order/add?ids=1,2,3
+
+###
+GET http://localhost:8080/store/order/add?ids=1,2,2,2
+
+###
+GET http://localhost:8080/store/order/add?ids=1
+
+###
+GET http://localhost:8080/store/order/add?ids=4,5,6
+
+###
+GET http://localhost:8080/store/order/add?ids=1&ids=2&ids=1
+
+###
+GET http://localhost:8080/store/order/remove?ids=1,2
+
+###
+GET http://localhost:8080/store/order/remove?ids=3
+
+###
+GET http://localhost:8080/store/order/get
+#Cookie: JSESSIONID=0151AEA65D1BFF70AE0D755E5070CF36
