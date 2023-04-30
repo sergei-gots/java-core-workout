@@ -9,36 +9,29 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pro.sky.java</groupId>
-    <artifactId>springboot-app</artifactId>
+    <artifactId>calculator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>spring-homework-app</name>
-    <description>skypro-java-core</description>
+    <name>calculator</name>
+    <description>calculator</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
-
 
     </dependencies>
+
+
 
     <build>
         <plugins>
@@ -46,7 +39,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>pro.sky.course_2_core.hw_2_11_store.StoreApplication</mainClass>
+                    <mainClass>pro.sky.calculator.CalculatorApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
