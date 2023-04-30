@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pro.sky.java</groupId>
-    <artifactId>springboot-app</artifactId>
+    <artifactId>homework-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>spring-homework-app</name>
