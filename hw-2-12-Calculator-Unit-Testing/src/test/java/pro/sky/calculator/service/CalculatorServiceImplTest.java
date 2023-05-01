@@ -11,25 +11,23 @@ public class CalculatorServiceImplTest {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
 
     @Test
-    public void plusTesT() {
-        assertThat(calculatorService.plus(3,5)).isEqualTo(8);
-        assertThat(calculatorService.plus(-2,2)).isEqualTo(0);
-    }
-    @Test
     public void plusTest() {
         assertThat(calculatorService.plus(3,5)).isEqualTo(8);
         assertThat(calculatorService.plus(-2,2)).isEqualTo(0);
     }
+
     @Test
     public void minusTest() {
         assertThat(calculatorService.minus(10,20)).isEqualTo(-10);
         assertThat(calculatorService.minus(8,2)).isEqualTo(6);
     }
+
     @Test
     public void multiplyTest() {
         assertThat(calculatorService.multiply(3,5)).isEqualTo(15);
         assertThat(calculatorService.multiply(-2,-2)).isEqualTo(4);
     }
+
     @Test
     public void divideTest() {
         assertThat(calculatorService.divide(3,5))
