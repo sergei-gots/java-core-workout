@@ -1,14 +1,13 @@
 package pro.sky.calculator.service;
 
 public interface CalculatorServiceInterface {
-    String welcome();
 
-    String plus(int a,  int b);
+    Number plus(Integer a,  Integer b);
 
-    String minus(int a,  int b);
+    Number minus(Integer a,  Integer b);
 
-    String multiply(int a,  int b);
+    Number multiply(Integer a,  Integer b);
 
-    String divide(int a,  int b);
+    Number divide(Integer a,  Integer b);
 
 }
