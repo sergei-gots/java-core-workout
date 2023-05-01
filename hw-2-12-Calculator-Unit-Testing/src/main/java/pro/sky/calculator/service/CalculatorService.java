@@ -1,6 +1,6 @@
 package pro.sky.calculator.service;
 
-public interface CalculatorServiceInterface {
+public interface CalculatorService {
 
     Number plus(Integer a,  Integer b);
 

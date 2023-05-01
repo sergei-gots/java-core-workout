@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.calculator.exception.DivideByZeroException;
 
 @Service
-public class CalculatorServiceImpl implements CalculatorServiceInterface {
+public class CalculatorServiceImpl implements CalculatorService {
 
 
     @Override

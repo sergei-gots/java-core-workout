@@ -4,15 +4,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.calculator.service.CalculatorServiceInterface;
+import pro.sky.calculator.service.CalculatorService;
 
 @RestController
 @RequestMapping(path = "/calculator")
 public class CalculatorController {
-    private final CalculatorServiceInterface service;
+    private final CalculatorService service;
 
-    private final String WELCOME_STRING = "Welcome to Calculator Web App!:)";
-    public CalculatorController(CalculatorServiceInterface calculatorService) {
+    private static final String WELCOME_STRING = "Welcome to Calculator Web App!:)";
+    public CalculatorController(CalculatorService calculatorService) {
         this.service = calculatorService;
     }
 
