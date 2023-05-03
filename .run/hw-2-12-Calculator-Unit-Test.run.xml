@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="hw-2-12-Calculator-Unit-Test" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" activateToolWindowBeforeRun="false">
+    <option name="ACTIVE_PROFILES" />
+    <option name="INCLUDE_PROVIDED_SCOPE" value="false" />
+    <module name="calculator-spring-app" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="pro.sky.calculator.CalculatorApplication" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/hw-2-12-Calculator-Unit-Testing" />
+    <method v="2">
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/hw-2-12-Calculator-Unit-Testing/pom.xml" goal="clean compile" />
+    </method>
+  </configuration>
+</component>

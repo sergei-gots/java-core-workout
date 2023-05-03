@@ -4,41 +4,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.calculator.service.CalculatorServiceInterface;
-import pro.sky.calculator.service.CalculatorServiceInterface;
+import pro.sky.calculator.service.CalculatorService;
 
 @RestController
 @RequestMapping(path = "/calculator")
 public class CalculatorController {
-    private final CalculatorServiceInterface calculatorService;
+    private final CalculatorService service;
 
-    public CalculatorController(CalculatorServiceInterface calculatorService) {
-        this.calculatorService = calculatorService;
+    private static final String WELCOME_STRING = "Welcome to Calculator Web App!:)";
+    public CalculatorController(CalculatorService calculatorService) {
+        this.service = calculatorService;
     }
 
     @GetMapping
     public String welcome() {
-        return calculatorService.welcome();
+        return WELCOME_STRING;
     }
 
     @GetMapping("/plus")
-    public String plus(@RequestParam("num1") int a, @RequestParam("num2") int b) {
-        return calculatorService.plus(a, b);
+    public Number plus(@RequestParam("num1") Integer a, @RequestParam("num2") Integer b) {
+        return service.plus(a, b);
     }
 
     @GetMapping("/minus")
-    public String minus(@RequestParam("num1") int a, @RequestParam("num2") int b) {
-        return calculatorService.minus(a, b);
+    public Number minus(@RequestParam("num1") Integer a, @RequestParam("num2") Integer b) {
+        return service.minus(a, b);
     }
 
     @GetMapping("/multiply")
-    public String multiply(@RequestParam("num1") int a, @RequestParam("num2") int b) {
-        return calculatorService.multiply(a, b);
+    public Number multiply(@RequestParam("num1") Integer a, @RequestParam("num2") Integer b) {
+        return service.multiply(a, b);
     }
 
     @GetMapping("/divide")
-    public String divide(@RequestParam("num1") int a, @RequestParam("num2") int b) {
-        return calculatorService.divide(a, b);
+    public Number divide(@RequestParam("num1") Integer a, @RequestParam("num2") Integer b) {
+        return service.divide(a, b);
     }
 
 }

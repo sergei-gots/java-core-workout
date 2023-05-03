@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pro.sky.java</groupId>
-    <artifactId>springboot-app</artifactId>
+    <artifactId>core-and-spring-homework-apps</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>spring-homework-app</name>
+    <name>core-and-spring-homework-apps</name>
     <description>skypro-java-core</description>
     <properties>
         <java.version>11</java.version>
