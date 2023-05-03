@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class University {
-    private Map<Integer, Student> allStudents = new HashMap<>();
+    private final Map<Integer, Student> allStudents = new HashMap<>();
     private int countId = 1;
 
     public void addStudent(Student student) {
