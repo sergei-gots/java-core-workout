@@ -16,13 +16,10 @@ public class University {
     }
 
     List<Student> getAllStudents() {
-        return allStudents.values().stream()
-                .collect(Collectors.toList());
+        return allStudents.values().stream().collect(Collectors.toList());
     }
 
     List<Student> getAllStudents(Student.Sex sex) {
-        return allStudents.values().stream()
-                .filter(student -> student.getSex() == sex)
-                .collect(Collectors.toList());
+        return allStudents.values().stream().filter(student -> student.getSex() == sex).collect(Collectors.toList());
     }
 }
