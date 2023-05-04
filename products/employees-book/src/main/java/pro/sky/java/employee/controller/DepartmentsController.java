@@ -1,9 +1,6 @@
 package pro.sky.java.employee.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.service.DepartmentsService;
 
@@ -22,29 +19,25 @@ public class DepartmentsController {
     /**
      * @return Employee with minimum wage within department.
      **/
-    @GetMapping("/min-salary")
-    Employee getMinPaidEmployee(int departmentId) {
+    @GetMapping("/{id}/min-salary")
+    Employee getMinPaidEmployee(@PathVariable("id") Integer departmentId) {
         return service.findMinSalaryEmployeeInDepartment(departmentId);
     }
 
     /**
      * @return Employee with maximum wage within department.
      **/
-    @GetMapping("/max-salary")
-    Employee getMaxPaidEmployee(int departmentId) {
+    @GetMapping("/{id}/max-salary")
+    Employee getMaxPaidEmployee(@PathVariable("id") Integer departmentId)  {
         return service.findMaxSalaryEmployeeInDepartment(departmentId);
     }
 
-
-    @GetMapping("/all")
-    Collection<Employee> dispatchGetAllEmployees(@RequestParam(required = false) Integer departmentId) {
-        if (departmentId == null) {
-            return service.getAllEmployeesByDepartments();
-        }
+    @GetMapping("/{id}")
+    Collection<Employee> dispatchGetAllEmployees(@PathVariable("id") Integer departmentId) {
         return service.findEmployeesByDepartment(departmentId);
     }
 
-    @GetMapping("/all-by-departments")
+    @GetMapping("/all")
     Collection<Employee> getAllEmployeesByDepartments() {
         return service.getAllEmployeesByDepartments();
     }

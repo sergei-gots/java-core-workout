@@ -1,9 +1,9 @@
 ###
-GET http://localhost:8080/departments/max-salary?departmentId=5
+GET http://localhost:8080/departments/5/max-salary
 ###
-GET http://localhost:8080/departments//min-salary?departmentId=5
+GET http://localhost:8080/departments/5/min-salary
 ###
-GET http://localhost:8080/departments/all?departmentId=5
+GET http://localhost:8080/departments/5
 ###
 GET http://localhost:8080/departments/all
 ###
