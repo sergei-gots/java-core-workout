@@ -1,14 +1,11 @@
 package pro.sky.java.employee.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.java.employee.exceptions.EmployeeAlreadyAddedException;
-import pro.sky.java.employee.exceptions.EmployeeNotFoundException;
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.model.Employees;
+import pro.sky.java.employee.repository.EmployeesRepository;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static pro.sky.java.employee.util.EmployeeUtils.checkDepartmentId;
@@ -16,68 +13,51 @@ import static pro.sky.java.employee.util.EmployeeUtils.checkDepartmentId;
 @Service
 public class EmployeesBookServiceImpl implements EmployeesBookService {
 
-    private Map<String, Employee> employees;
+    private final EmployeesRepository employeesRepository;
 
-    public EmployeesBookServiceImpl() {
-        employees = Employees.getInstance().getEmployees();
+    public EmployeesBookServiceImpl(EmployeesRepository employeesRepository) {
+        this.employeesRepository = employeesRepository;
     }
 
     @Override
     public Employee addEmployee(Employee employee) {
-        if (employees.containsKey(employee.getKey())) {
-            throw new EmployeeAlreadyAddedException(employee);
-        }
-        employees.put(employee.getKey(), employee);
-        return employee;
+        return employeesRepository.add(employee);
     }
 
     @Override
     public Employee removeEmployee(Employee employee) {
-        final String key = employee.getKey();
-        if (employees.get(key) == null) {
-            throw new EmployeeNotFoundException(employee);
-        }
-        return employees.remove(key);
+        return employeesRepository.remove(employee);
     }
 
     @Override
     public Employee findEmployee(Employee employee) {
-        final Employee foundEmployee = employees.get(employee.getKey());
-        if (foundEmployee == null) {
-            throw new EmployeeNotFoundException(employee);
-        }
-        return foundEmployee;
+        return employeesRepository.find(employee);
     }
 
     @Override
     public Collection<Employee> getAllEmployees() {
-        return List.copyOf(employees.values());
+
+        return employeesRepository.findAll();
     }
 
     @Override
-    public Employee setSalary(Employee employee, int newSalary) {
-        Employee employeeToUpdate = employees.get(employee.getKey());
-        if (employeeToUpdate == null) {
-            throw new EmployeeNotFoundException(employee);
-        }
-        employeeToUpdate.setSalary(newSalary);
-        return employeeToUpdate;
+    public Employee setSalary(Employee template, int newSalary) {
+        Employee employee = employeesRepository.find(template);
+        employee.setSalary(newSalary);
+        return employee.copy();
     }
 
     @Override
-    public Employee setDepartment(Employee employee, int newDepartmentId) {
-        checkDepartmentId(newDepartmentId);
-        Employee employeeToUpdate = employees.get(employee.getKey());
-        if (employeeToUpdate == null) {
-            throw new EmployeeNotFoundException(employee);
-        }
-        employeeToUpdate.setDepartmentId(newDepartmentId);
-        return employeeToUpdate;
+    public Employee setDepartment(Employee template, int departmentId) {
+        checkDepartmentId(departmentId);
+        Employee employee = employeesRepository.find(template);
+        employee.setDepartmentId(departmentId);
+        return employee.copy();
     }
 
     @Override
     public List<Employee> findEmployeesWithSalaryGreaterOrEqualTo(int targetSalary) {
-        return employees.values().stream()
+        return employeesRepository.findAll().stream()
                 .filter(e -> e.getSalary() >= targetSalary)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -85,7 +65,7 @@ public class EmployeesBookServiceImpl implements EmployeesBookService {
 
     @Override
     public Collection<Employee> findEmployeesWithSalaryLessThan(double targetSalary) {
-        return employees.values().stream()
+        return employeesRepository.findAll().stream()
                 .filter(e -> e.getSalary() < targetSalary)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -94,14 +74,14 @@ public class EmployeesBookServiceImpl implements EmployeesBookService {
     @Override
     public Collection<Employee> indexSalary(int salaryIndexationPercentage) {
         double salaryMultiplier = (100.0 + salaryIndexationPercentage) / 100.0;
-        Collection<Employee> employeesCollection = employees.values();
+        Collection<Employee> employeesCollection = employeesRepository.findAll();
         employeesCollection.forEach(e -> e.setSalary(e.getSalary() * salaryMultiplier));
         return employeesCollection;
     }
 
     @Override
     public Employee findMaxSalaryEmployee() {
-        return employees.values()
+        return employeesRepository.findAll()
                 .stream()
                 .max(new SalaryComparator<>())
                 .orElse(null);
@@ -109,7 +89,7 @@ public class EmployeesBookServiceImpl implements EmployeesBookService {
 
     @Override
     public Employee findMinSalaryEmployee() {
-        return employees.values()
+        return employeesRepository.findAll()
                 .stream()
                 .min(new SalaryComparator<>())
                 .orElse(null);
@@ -121,11 +101,12 @@ public class EmployeesBookServiceImpl implements EmployeesBookService {
     }
 
     private double calculateMonthlyPayrollAsNumber() {
-        return employees.values().stream().mapToDouble(Employee::getSalary).sum();
+        return employeesRepository.findAll().stream().mapToDouble(Employee::getSalary).sum();
     }
 
     @Override
     public String calculateAverageSalary() {
-        return Employee.formatSalary((employees.size() == 0) ? 0 : calculateMonthlyPayrollAsNumber() / employees.size());
+        return Employee.formatSalary((employeesRepository.count() == 0) ?
+                0 : calculateMonthlyPayrollAsNumber() / employeesRepository.count());
     }
 }

@@ -106,4 +106,8 @@ public class Employee {
     public String getKey() {
         return firstName + lastName;
     }
+
+    public Employee copy() {
+        return new Employee(firstName, lastName, departmentId, salary);
+    }
 }
