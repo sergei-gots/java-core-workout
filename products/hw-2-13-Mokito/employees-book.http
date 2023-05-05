@@ -10,50 +10,11 @@ GET http://localhost:8080/department/5/employees
 GET http://localhost:8080/department/employees
 ###
 
-GET http://localhost:8080/employees-book/add-employee?firstName=Sergei&lastName=Gots&departmentId=5&salary=370000
+GET http://localhost:8080/employees-book/add?firstName=Sergei&lastName=Gots&departmentId=5&salary=370000
 ###
-GET http://localhost:8080/employees-book/list
+GET http://localhost:8080/employees-book/find?firstName=Афанасий&lastName=никитин
 ###
-GET http://localhost:8080/employees-book/find-employee?firstName=Сергей&lastName=рахманинов
+GET http://localhost:8080/employees-book/find?firstName=Михаил&lastName=глинка
 ###
-GET http://localhost:8080/employees-book/find-employee?firstName=Сергей&lastName=рахманинов1
+GET http://localhost:8080/employees-book/remove?firstName=Афанасий&lastName=никитин
 ###
-GET http://localhost:8080/employees-book/remove-employee?firstName=Афанасий&lastName=никитин
-###
-GET http://localhost:8080/employees-book/company-average-salary
-###
-GET http://localhost:8080/employees-book/company-monthly-payroll
-###
-GET http://localhost:8080/employees-book/company-min-salary-employee
-###
-GET http://localhost:8080/employees-book/company-max-salary-employee
-###
-GET http://localhost:8080/employees-book/assign-salary?firstName=Иван&lastName=Павлов&salary=790000
-
-GET http://localhost:8080/employees-book/assign-salary?firstName=Михаил&lastName=Глинка&salary=90000
-###
-GET http://localhost:8080/employees-book/assign-department?firstName=Михаил&lastName=Глинка&departmentId=1
-###
-GET http://localhost:8080/employees-book/employees-with-salary-greater-or-equal-to?salary=300000
-###
-GET http://localhost:8080/employees-book/employees-with-salary-less-than?salary=500000
-###
-GET http://localhost:8080/employees-book/employees-by-department?departmentId=1
-###
-GET http://localhost:8080/employees-book/index-salary-in-department?departmentId=1&percentage=20
-###
-GET http://localhost:8080/employees-book/index-salary-for-all?percentage=10
-###
-GET http://localhost:8080/employees-book/average-salary-in-department?departmentId=3
-###
-GET http://localhost:8080/employees-book/find-max-wage-employee-in-department?departmentId=1
-###
-GET http://localhost:8080/employees-book/find-min-salary-employee-in-department?departmentId=1
-###
-GET http://localhost:8080/employees-book/find-max-salary-employee
-###
-GET http://localhost:8080/employees-book/find-min-wage-employee
-###
-GET http://localhost:8080/employees-book/monthly-payroll-in-department?departmentId=1
-###
-GET http://localhost:8080/employees-book/assign-department?firstName=Михаил&lastName=Глинка&departmentId=10

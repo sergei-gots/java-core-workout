@@ -1,16 +1,16 @@
 package pro.sky.java.employee.exceptions;
 
-import pro.sky.java.employee.model.Employee;
+import pro.sky.java.employee.model.Person;
 
 public abstract class EmployeeException extends RuntimeException {
-    private final Employee employee;
-    public EmployeeException(Employee employee) {
+    private final Person person;
+    public EmployeeException(Person person) {
         super();
-        this.employee = employee;
+        this.person = person;
     }
 
     public String getEmployeeName() {
-        return "<b>" + employee.getName() + "</b>";
+        return "<b>" + person.getName() + "</b>";
     }
 
     @Override

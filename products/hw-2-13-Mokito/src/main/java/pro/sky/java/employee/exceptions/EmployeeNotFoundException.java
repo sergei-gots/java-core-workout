@@ -1,10 +1,10 @@
 package pro.sky.java.employee.exceptions;
 
-import pro.sky.java.employee.model.Employee;
+import pro.sky.java.employee.model.Person;
 
 public class EmployeeNotFoundException extends EmployeeException {
-    public EmployeeNotFoundException(Employee employee) {
-        super(employee);
+    public EmployeeNotFoundException(Person person) {
+        super(person);
     }
 
     @Override

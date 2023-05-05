@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import pro.sky.java.employee.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.java.employee.exceptions.EmployeeNotFoundException;
 import pro.sky.java.employee.model.Employee;
+import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.util.EmployeeUtils;
 
 import java.util.Collection;
@@ -38,19 +39,19 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     }
 
     @Override
-    public Employee remove(Employee employee) {
-        final String key = employee.getKey();
+    public Employee remove(Person person) {
+        final String key = person.getKey();
         if (employees.get(key) == null) {
-            throw new EmployeeNotFoundException(employee);
+            throw new EmployeeNotFoundException(person);
         }
         return employees.remove(key);
     }
 
     @Override
-    public Employee find(Employee employee) {
-        final Employee foundEmployee = employees.get(employee.getKey());
+    public Employee find(Person person) {
+        final Employee foundEmployee = employees.get(person.getKey());
         if (foundEmployee == null) {
-            throw new EmployeeNotFoundException(employee);
+            throw new EmployeeNotFoundException(person);
         }
         return foundEmployee;
     }
