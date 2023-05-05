@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.service.DepartmentsService;
 import pro.sky.java.employee.service.EmployeesBookService;
 
 import java.util.Collection;
@@ -15,12 +14,9 @@ import java.util.List;
 public class EmployeesBookController {
 
     final private EmployeesBookService employeesBookService;
-    final private DepartmentsService departmentsService;
 
-    public EmployeesBookController(EmployeesBookService employeesBookService,
-                                   DepartmentsService departmentsService) {
+    public EmployeesBookController(EmployeesBookService employeesBookService) {
         this.employeesBookService = employeesBookService;
-        this.departmentsService = departmentsService;
     }
 
     @GetMapping("/add-employee")
@@ -82,35 +78,9 @@ public class EmployeesBookController {
     public Collection<Employee> findEmployeesWithSalaryGreaterOrEqualTot(int salary) {
         return employeesBookService.findEmployeesWithSalaryLessThan(salary);
     }
-
-    @GetMapping("/employees-by-department")
-    public Collection<Employee> findEmployeesByDepartment(int departmentId) {
-        return departmentsService.findEmployeesByDepartment(departmentId);
-    }
-
-    @GetMapping("/index-salary-in-department")
-    public Collection<Employee> indexSalaryInDepartment(int departmentId, int percentage) {
-        return departmentsService.indexSalaryInDepartment(departmentId, percentage);
-    }
-
     @GetMapping("/index-salary-for-all")
     public Collection<Employee> indexSalaryInDepartment(int percentage) {
         return employeesBookService.indexSalary(percentage);
-    }
-
-    @GetMapping("/average-salary-in-department")
-    public String calcAverageSalaryInDepartment(int departmentId) {
-        return departmentsService.calcAverageSalaryInDepartment(departmentId);
-    }
-
-    @GetMapping("/find-max-salary-employee-in-department")
-    public Employee findMaxSalaryEmployeeInDepartment(int departmentId) {
-        return departmentsService.findMaxSalaryEmployeeInDepartment(departmentId);
-    }
-
-    @GetMapping("/find-min-salary-employee-in-department")
-    public Employee findMinSalaryEmployeeInDepartment(int departmentId) {
-        return departmentsService.findMinSalaryEmployeeInDepartment(departmentId);
     }
 
     @GetMapping("/find-max-salary-employee")
@@ -123,8 +93,4 @@ public class EmployeesBookController {
         return employeesBookService.findMinSalaryEmployee();
     }
 
-    @GetMapping("/monthly-payroll-in-department")
-    public String calculateMonthlyPayrollInDepartment(int departmentId) {
-        return departmentsService.calculateMonthlyPayrollInDepartment(departmentId);
-    }
 }
