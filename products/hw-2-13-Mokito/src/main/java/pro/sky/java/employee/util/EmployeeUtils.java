@@ -10,12 +10,6 @@ import java.util.Random;
 public final class EmployeeUtils {
     public static final int DEPARTMENT_COUNT = 5;
     private static final Random random = new Random();
-
-    public static void validateDepartment(int departmentId) {
-        if (departmentId < 1 || departmentId > DEPARTMENT_COUNT) {
-            throw new IllegalArgumentException("Department with number " + departmentId + " is not listed.");
-        }
-    }
     static double generateRandomSalary() {
         return 240_000 + 8_000 * random.nextInt(30);
     }

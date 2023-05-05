@@ -7,7 +7,7 @@ import pro.sky.java.employee.repository.EmployeesRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static pro.sky.java.employee.util.EmployeeUtils.validateDepartment;
+import pro.sky.java.employee.util.EmployeeValidator;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -20,27 +20,27 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Collection<Employee> getEmployeesByDepartment(Integer departmentId) {
-        validateDepartment(departmentId);
+        EmployeeValidator.validateDepartment(departmentId);
         return employeesRepository.findAll().stream().filter(e -> e.getDepartmentId() == departmentId).collect(Collectors.toUnmodifiableList());
     }
 
     @Override
     public String getMaxSalaryInDepartment(Integer departmentId) {
-        validateDepartment(departmentId);
+        EmployeeValidator.validateDepartment(departmentId);
         Employee maxSalaryEmployee = employeesRepository.findAll().stream().filter(e -> e.getDepartmentId() == departmentId).max(new SalaryComparator<>()).orElse(null);
         return (maxSalaryEmployee != null) ? maxSalaryEmployee.getSalaryRub() : "There are no employees in this department.";
     }
 
     @Override
     public String getMinSalaryInDepartment(Integer departmentId) {
-        validateDepartment(departmentId);
+        EmployeeValidator.validateDepartment(departmentId);
         Employee minSalaryEmployee = employeesRepository.findAll().stream().filter(e -> e.getDepartmentId() == departmentId).min(new SalaryComparator<>()).orElse(null);
         return (minSalaryEmployee != null) ? minSalaryEmployee.getSalaryRub() : "There are no employees in this department.";
     }
 
     @Override
     public String getSalarySumInDepartment(Integer departmentId) {
-        validateDepartment(departmentId);
+        EmployeeValidator.validateDepartment(departmentId);
         return Employee.formatSalary(employeesRepository.findAll().stream().filter(e -> e.getDepartmentId() == departmentId).mapToDouble(Employee::getSalary).sum());
     }
 

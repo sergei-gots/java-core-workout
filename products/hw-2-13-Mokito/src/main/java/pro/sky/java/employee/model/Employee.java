@@ -2,8 +2,7 @@ package pro.sky.java.employee.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.StringUtils;
-import pro.sky.java.employee.exceptions.IllegalNameException;
+import pro.sky.java.employee.util.EmployeeValidator;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
@@ -15,7 +14,7 @@ import java.util.Objects;
  * Отделы для простоты должны быть названы от 1 до 5.
  **/
 public class Employee {
-    private static final double MIN_ALLOWED_SALARY = 100_000;
+    public static final double MIN_ALLOWED_SALARY = 100_000;
     private static final DecimalFormat salaryFormat = new DecimalFormat("###,###,##0.00");
     private static int nextId;
     private final int id;
@@ -26,24 +25,16 @@ public class Employee {
 
     public Employee(String firstName, String lastName) {
         id = ++nextId;
-        this.firstName = validateName(firstName);
-        this.lastName = validateName(lastName);
+        this.firstName = EmployeeValidator.validateName(firstName);
+        this.lastName = EmployeeValidator.validateName(lastName);
     }
 
     public Employee(String firstName, String lastName, int departmentId, double salary) {
         this(firstName, lastName);
         this.departmentId = departmentId;
-        checkSalary(salary);
+        EmployeeValidator.validateSalary(salary);
         this.salary = salary;
     }
-
-    String validateName(String name) {
-        if(!StringUtils.isAlpha(name)) {
-            throw new IllegalNameException(name);
-        }
-        return StringUtils.capitalize(name);
-    }
-
     public static String formatSalary(double salary) {
         return salaryFormat.format(salary) + " руб.";
     }
@@ -61,11 +52,6 @@ public class Employee {
         return Objects.hash(firstName, lastName);
     }
 
-    private void checkSalary(double salary) {
-        if (salary <= MIN_ALLOWED_SALARY) {
-            throw new IllegalArgumentException("Труд будущего сотрудника " + firstName + " " + lastName + " явно недооценен.");
-        }
-    }
 
 
     @Override
@@ -89,6 +75,7 @@ public class Employee {
     }
 
     public void setDepartmentId(int departmentId) {
+        EmployeeValidator.validateDepartment(departmentId);
         this.departmentId = departmentId;
     }
 
@@ -98,7 +85,7 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
-        checkSalary(salary);
+        EmployeeValidator.validateSalary(salary);
         this.salary = salary;
     }
 

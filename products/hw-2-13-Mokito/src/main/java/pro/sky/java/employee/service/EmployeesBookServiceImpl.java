@@ -8,8 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static pro.sky.java.employee.util.EmployeeUtils.validateDepartment;
-
 @Service
 public class EmployeesBookServiceImpl implements EmployeesBookService {
 
@@ -49,7 +47,6 @@ public class EmployeesBookServiceImpl implements EmployeesBookService {
 
     @Override
     public Employee setDepartment(Employee template, int departmentId) {
-        validateDepartment(departmentId);
         Employee employee = employeesRepository.find(template);
         employee.setDepartmentId(departmentId);
         return employee.copy();
