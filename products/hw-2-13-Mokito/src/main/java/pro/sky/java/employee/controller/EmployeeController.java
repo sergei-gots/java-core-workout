@@ -5,18 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.model.Person;
-import pro.sky.java.employee.service.EmployeesBookService;
-
-import java.util.Collection;
-import java.util.List;
+import pro.sky.java.employee.service.EmployeeService;
 
 @RestController
 @RequestMapping("/employees-book")
-public class EmployeesBookController {
+public class EmployeeController {
 
-    final private EmployeesBookService employeesBookService;
+    final private EmployeeService employeesBookService;
 
-    public EmployeesBookController(EmployeesBookService employeesBookService) {
+    public EmployeeController(EmployeeService employeesBookService) {
         this.employeesBookService = employeesBookService;
     }
 

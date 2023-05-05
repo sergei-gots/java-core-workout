@@ -6,11 +6,11 @@ import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.repository.EmployeesRepository;
 
 @Service
-public class EmployeesBookServiceImpl implements EmployeesBookService {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeesRepository employeesRepository;
 
-    public EmployeesBookServiceImpl(EmployeesRepository employeesRepository) {
+    public EmployeeServiceImpl(EmployeesRepository employeesRepository) {
         this.employeesRepository = employeesRepository;
     }
 
