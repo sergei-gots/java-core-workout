@@ -9,6 +9,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.context.annotation.Bean;
+import pro.sky.java.employee.exceptions.DepartmentIsNotListedException;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.model.util.EmployeeValidator;
 
@@ -16,6 +19,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,9 +27,8 @@ public class DepartmentServiceImplTest {
 
     @Mock
     private EmployeeService employeeService;
-    @SuppressWarnings("unused")
-    @Mock
-    private EmployeeValidator employeeValidator;
+
+     private EmployeeValidator employeeValidator;
 
     @InjectMocks
     private DepartmentServiceImpl departmentService;
@@ -51,6 +54,12 @@ public class DepartmentServiceImplTest {
                 Arguments.of(1, "230 001,00 руб."),
                 Arguments.of(2, "270 000,00 руб."),
                 Arguments.of(3, "130 000,00 руб.")
+        );
+    }
+
+    public static Stream<Arguments> incorrectDepartmentIdTestParams() {
+        return Stream.of(
+                Arguments.of(-1, 0, 6, 11)
         );
     }
 
@@ -93,5 +102,26 @@ public class DepartmentServiceImplTest {
     @Test
     public void getAllEmployeesByDepartmentsTest() {
         Map<Integer, List<Employee>> employeesMap = departmentService.getAllEmployeesByDepartments();
+    }
+
+    @ParameterizedTest
+    @MethodSource("incorrectDepartmentIdTestParams")
+    public void getMaxSalaryWithIncorrectDepartmentId(int departmentId) {
+        assertThatExceptionOfType(DepartmentIsNotListedException.class)
+                .isThrownBy(()->departmentService.getMaxSalary(departmentId));
+    }
+
+    @ParameterizedTest
+    @MethodSource("incorrectDepartmentIdTestParams")
+    public void getMinSalaryWithIncorrectDepartmentId(int departmentId) {
+        assertThatExceptionOfType(DepartmentIsNotListedException.class)
+                .isThrownBy(()->departmentService.getMinSalary(departmentId));
+    }
+
+    @ParameterizedTest
+    @MethodSource("incorrectDepartmentIdTestParams")
+    public void getSalarySumWithIncorrectDepartmentId(int departmentId) {
+        assertThatExceptionOfType(DepartmentIsNotListedException.class)
+                .isThrownBy(()->departmentService.getSalarySum(departmentId));
     }
 }
