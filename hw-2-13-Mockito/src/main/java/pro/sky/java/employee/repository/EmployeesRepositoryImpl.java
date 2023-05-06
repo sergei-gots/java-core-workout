@@ -3,12 +3,15 @@ package pro.sky.java.employee.repository;
 import org.springframework.stereotype.Repository;
 import pro.sky.java.employee.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.java.employee.exceptions.EmployeeNotFoundException;
+import pro.sky.java.employee.exceptions.EmployeeStorageIsFullException;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.util.EmployeeUtils;
 
 import java.util.List;
 import java.util.Map;
+
+import static pro.sky.java.employee.util.EmployeeConstants.EMPLOYEES_MAX_COUNT;
 
 @Repository
 public class EmployeesRepositoryImpl implements EmployeesRepository {
@@ -20,9 +23,6 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     static {
         instance = new EmployeesRepositoryImpl();
     }
-    public static EmployeesRepositoryImpl getInstance() {
-        return instance;
-    }
 
     public static EmployeesRepositoryImpl getEmptyInstance() {
         instance.employees.clear();
@@ -30,11 +30,14 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     }
 
     private EmployeesRepositoryImpl() {
-        employees = EmployeeUtils.generateEmployees();
+           employees = EmployeeUtils.generateEmployees();
     }
 
     @Override
     public Employee add(Employee employee) {
+        if(employees.size() == EMPLOYEES_MAX_COUNT) {
+            throw new EmployeeStorageIsFullException();
+        }
         if (employees.containsKey(employee.getKey())) {
             throw new EmployeeAlreadyAddedException(employee);
         }
@@ -57,7 +60,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
         if (foundEmployee == null) {
             throw new EmployeeNotFoundException(person);
         }
-        return foundEmployee;
+        return foundEmployee.copy();
     }
 
     @Override

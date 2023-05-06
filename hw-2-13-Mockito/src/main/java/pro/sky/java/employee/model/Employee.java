@@ -2,10 +2,8 @@ package pro.sky.java.employee.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import pro.sky.java.employee.util.EmployeeValidator;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 
 /**
@@ -26,7 +24,6 @@ public class Employee extends Person {
     public Employee(String firstName, String lastName, int departmentId, double salary) {
         super(firstName, lastName);
         this.departmentId = departmentId;
-        EmployeeValidator.validateSalary(salary);
         this.salary = salary;
     }
     public static String formatSalary(double salary) {
@@ -51,18 +48,12 @@ public class Employee extends Person {
     }
 
     public void setDepartmentId(int departmentId) {
-        EmployeeValidator.validateDepartment(departmentId);
         this.departmentId = departmentId;
     }
 
     @JsonIgnore
     public double getSalary() {
         return salary;
-    }
-
-    public void setSalary(double salary) {
-        EmployeeValidator.validateSalary(salary);
-        this.salary = salary;
     }
 
     public Employee copy() {

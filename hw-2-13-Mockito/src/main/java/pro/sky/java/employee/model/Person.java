@@ -1,10 +1,7 @@
 package pro.sky.java.employee.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import pro.sky.java.employee.util.EmployeeValidator;
-import pro.sky.java.employee.util.PersonValidator;
 
-import java.text.DecimalFormat;
 import java.util.Objects;
 
 
@@ -16,19 +13,16 @@ public class Person {
 
     public Person(String firstName, String lastName) {
         id = ++nextId;
-        this.firstName = PersonValidator.validateName(firstName);
-        this.lastName = PersonValidator.validateName(lastName);
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Person(String firstName, String lastName, int departmentId, double salary) {
-        this(firstName, lastName);
-        EmployeeValidator.validateSalary(salary);
-    }
-
+    @JsonIgnore
     public String getFirstName() {
         return firstName;
     }
 
+    @JsonIgnore
     public String getLastName() {
         return lastName;
     }
@@ -46,8 +40,6 @@ public class Person {
         return Objects.hash(firstName, lastName);
     }
 
-
-
     @Override
     public String toString() {
         return id + ". " + firstName + " " + lastName;
@@ -57,7 +49,6 @@ public class Person {
     public String getName() {
         return firstName + " " + lastName;
     }
-
 
     @JsonIgnore
     public String getKey() {

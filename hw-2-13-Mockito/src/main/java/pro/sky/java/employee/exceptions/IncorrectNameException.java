@@ -1,10 +1,10 @@
 package pro.sky.java.employee.exceptions;
 
 
-public  class IllegalNameException extends IllegalArgumentException {
+public  class IncorrectNameException extends IllegalArgumentException {
 
     private final String name;
-    public IllegalNameException(String name) {
+    public IncorrectNameException(String name) {
         this.name = name;
     }
 

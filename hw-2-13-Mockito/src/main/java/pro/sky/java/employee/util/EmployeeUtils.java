@@ -1,6 +1,7 @@
 package pro.sky.java.employee.util;
 
 import pro.sky.java.employee.model.Employee;
+import pro.sky.java.employee.model.util.EmployeeKey;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,34 +9,18 @@ import java.util.Map;
 import java.util.Random;
 
 public final class EmployeeUtils {
-    public static final int DEPARTMENT_COUNT = 5;
+
     private static final Random random = new Random();
     static double generateRandomSalary() {
         return 240_000 + 8_000 * random.nextInt(30);
     }
 
     static int generateRandomDepartmentId() {
-        return random.nextInt(DEPARTMENT_COUNT) + 1;
+        return random.nextInt(EmployeeConstants.DEPARTMENT_COUNT) + 1;
     }
 
     public static Map<String, Employee> generateEmployees() {
-        class EmployeeKey {
-            private final String firstName;
-            private final String lastName;
-            public EmployeeKey(String firstName, String lastName) {
-                this.firstName = firstName;
-                this.lastName = lastName;
-            }
-            public String getFirstName() {
-                return firstName;
-            }
-            public String getLastName() {
-                return lastName;
-            }
-            public String getKey() {
-                return firstName + lastName;
-            }
-        }
+
         List<EmployeeKey> names = List.of(
                 new EmployeeKey("Аполлон", "Майков"),
                 new EmployeeKey("Афанасий", "Никитин"),
