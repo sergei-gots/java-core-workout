@@ -40,7 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public String getSalarySumIn(Integer departmentId) {
+    public String getSalarySum(Integer departmentId) {
         employeeValidator.validateDepartment(departmentId);
         return Employee.formatSalary(employeeService.getAll().stream().filter(e -> e.getDepartmentId() == departmentId).mapToDouble(Employee::getSalary).sum());
     }

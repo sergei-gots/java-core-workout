@@ -66,15 +66,15 @@ public class EmployeeServiceImplTest {
     @BeforeEach
     public void beforeEach() {
         employeeService.add("John", "Johnson", 1, 100_001);
-        employeeService.add("Peter", "Peterson", 2, 120_000);
+        employeeService.add("Peter", "Peterson", 1, 120_000);
 
     }
 
     @Test
     public void addTest() {
-        Employee expected = new Employee("Andrew", "Anderson-the-Elder", 3, 130_000);
+        Employee expected = new Employee("Andrew", "Anderson-the-Elder", 2, 130_000);
         int beforeCount = employeeService.getAll().size();
-        Employee actual =  employeeService.add("Andrew", "Anderson-the-Elder", 3, 130_000);
+        Employee actual =  employeeService.add("Andrew", "Anderson-the-Elder", 2, 130_000);
         assertThat(actual).usingRecursiveComparison()
                 .comparingOnlyFields("firstName", "lastName", "departmentId", "salary")
                 .isEqualTo(expected)
@@ -200,7 +200,7 @@ public class EmployeeServiceImplTest {
                 .asList()
                 .containsExactlyInAnyOrderElementsOf(List.of(
                         new Employee("John", "Johnson", 1, 100_001),
-                        new Employee("Peter", "Peterson", 2, 120_000)
+                        new Employee("Peter", "Peterson", 1, 120_000)
                         )
                 );
         assertThat(employeeService.getAll().size()).isEqualTo(2);
