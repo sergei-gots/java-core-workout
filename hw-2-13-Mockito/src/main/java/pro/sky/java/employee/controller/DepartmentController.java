@@ -21,7 +21,7 @@ public class DepartmentController {
 
     @GetMapping("/{id}/salary/min")
     String getMinSalaryInDepartment(@PathVariable("id") Integer departmentId) {
-        return service.getMinSalaryInDepartment(departmentId);
+        return service.getMinSalary(departmentId);
     }
 
     /**
@@ -29,17 +29,17 @@ public class DepartmentController {
      **/
     @GetMapping("/{id}/salary/max")
     String getMaxSalaryInDepartment(@PathVariable("id") Integer departmentId)  {
-        return service.getMaxSalaryInDepartment(departmentId);
+        return service.getMaxSalary(departmentId);
     }
 
     @GetMapping("/{id}/salary/sum")
     String getSalarySumInDepartment(@PathVariable("id") Integer departmentId) {
-        return service.getSalarySumInDepartment(departmentId);
+        return service.getSalarySumIn(departmentId);
     }
 
     @GetMapping("/{id}/employees")
     Collection<Employee> getEmployees(@PathVariable("id") Integer departmentId) {
-        return service.getEmployeesByDepartment(departmentId);
+        return service.getEmployees(departmentId);
     }
 
     @GetMapping("employees")

@@ -3,7 +3,7 @@ package pro.sky.java.employee.repository;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.model.Person;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface EmployeesRepository {
     Employee add(Employee employee);
@@ -12,9 +12,9 @@ public interface EmployeesRepository {
 
     Employee find(Person person);
 
-    Collection<Employee> findAll();
+    List<Employee> findAll();
 
-    Collection<Employee> removeAll();
+    List<Employee> removeAll();
 
     int count();
 }

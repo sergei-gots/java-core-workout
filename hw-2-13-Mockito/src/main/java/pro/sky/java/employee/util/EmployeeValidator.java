@@ -14,7 +14,7 @@ public class EmployeeValidator extends PersonValidator {
     }
 
     public static void validateSalary(double salary) {
-        if (salary <= MIN_ALLOWED_SALARY) {
+        if (salary < MIN_ALLOWED_SALARY) {
             throw new SalaryIsTooLowException();
         }
     }

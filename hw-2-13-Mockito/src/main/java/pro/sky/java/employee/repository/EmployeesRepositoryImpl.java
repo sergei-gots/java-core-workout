@@ -7,7 +7,6 @@ import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.util.EmployeeUtils;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +21,11 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
         instance = new EmployeesRepositoryImpl();
     }
     public static EmployeesRepositoryImpl getInstance() {
+        return instance;
+    }
+
+    public static EmployeesRepositoryImpl getEmptyInstance() {
+        instance.employees.clear();
         return instance;
     }
 
@@ -57,15 +61,15 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     }
 
     @Override
-    public Collection<Employee> findAll() {
+    public List<Employee> findAll() {
         return List.copyOf(employees.values());
     }
 
     @Override
-    public Collection<Employee> removeAll() {
-        Collection<Employee> collection = List.copyOf(employees.values());
+    public List<Employee> removeAll() {
+        List<Employee> list = List.copyOf(employees.values());
         employees.clear();
-        return collection;
+        return list;
     }
 
     @Override

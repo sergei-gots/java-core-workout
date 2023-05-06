@@ -20,16 +20,16 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(String firstName, String lastName, Integer departmentId, Double salary) {
-        return employeesBookService.addEmployee(new Employee(firstName, lastName, departmentId, salary));
+        return employeesBookService.add(firstName, lastName, departmentId, salary);
     }
 
     @GetMapping("/find")
     public Employee findEmployee(String firstName, String lastName) {
-        return employeesBookService.findEmployee(new Person(firstName, lastName));
+        return employeesBookService.find(firstName, lastName);
     }
 
     @GetMapping("/remove")
     public Employee removeEmployee(String firstName, String lastName) {
-        return employeesBookService.removeEmployee(new Person(firstName, lastName));
+        return employeesBookService.remove(firstName, lastName);
     }
 }
