@@ -2,14 +2,20 @@ package pro.sky.java.employee.service;
 
 import pro.sky.java.employee.model.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeService {
-    Employee add(String firstName, String lastName, int departmentId, double salary);
+    void add(Collection<Employee> employees);
 
-    Employee remove(String firstName, String lastName);
+    void add(Employee employee);
 
-    Employee find(String firstName, String lastName);
+    void edit(Employee employee);
 
-    List<Employee> getAll();
+    Employee remove(int id);
+
+    Employee get(int id);
+
+    Collection<Employee> getAll();
+
+    Collection<Employee> getEmployeesWithSalaryHigherThan(double salary);
 }

@@ -1,14 +1,12 @@
 package pro.sky.java.employee.exceptions;
 
-import pro.sky.java.employee.model.Employee;
-
 public class EmployeeAlreadyAddedException extends EmployeeException {
-    public EmployeeAlreadyAddedException(Employee employee) {
-        super(employee);
+    public EmployeeAlreadyAddedException(int employeeId) {
+        super(employeeId);
     }
 
     @Override
     public String getMessage() {
-        return "Employee with the name " + getEmployeeName() + " does already exist in the register.";
+        return "Employee with the name " + getEmployeeId() + " does already exist in the register.";
     }
 }

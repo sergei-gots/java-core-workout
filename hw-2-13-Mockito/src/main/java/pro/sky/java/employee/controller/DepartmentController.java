@@ -1,6 +1,9 @@
 package pro.sky.java.employee.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.employee.model.Employee;
 import pro.sky.java.employee.service.DepartmentService;
 
@@ -9,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/department")
+@RequestMapping("/departments")
 public class DepartmentController {
 
     final private DepartmentService service;
@@ -42,7 +45,7 @@ public class DepartmentController {
         return service.getEmployees(departmentId);
     }
 
-    @GetMapping("employees")
+    @GetMapping("/all")
     Map<Integer, List<Employee>> getAllEmployeesByDepartments() {
         return service.getAllEmployeesByDepartments();
     }

@@ -5,11 +5,13 @@ import pro.sky.java.employee.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.java.employee.exceptions.EmployeeNotFoundException;
 import pro.sky.java.employee.exceptions.EmployeeStorageIsFullException;
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.util.EmployeeUtils;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static pro.sky.java.employee.util.EmployeeConstants.EMPLOYEES_MAX_COUNT;
 
@@ -18,7 +20,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
 
     private static final EmployeesRepositoryImpl instance;
 
-    private final Map<String, Employee> employees;
+    private final Map<Integer, Employee> employees;
 
     static {
         instance = new EmployeesRepositoryImpl();
@@ -30,53 +32,63 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     }
 
     private EmployeesRepositoryImpl() {
-           employees = EmployeeUtils.generateEmployees();
+           employees =  new HashMap<>();
     }
 
     @Override
-    public Employee add(Employee employee) {
+    public void add(Employee employee) {
         if(employees.size() == EMPLOYEES_MAX_COUNT) {
             throw new EmployeeStorageIsFullException();
         }
-        if (employees.containsKey(employee.getKey())) {
-            throw new EmployeeAlreadyAddedException(employee);
+        final int id = employee.getId();
+        if (employees.containsKey(id)) {
+            throw new EmployeeAlreadyAddedException(id);
         }
-        employees.put(employee.getKey(), employee);
-        return employee;
+        employees.put(id, employee);
     }
 
     @Override
-    public Employee remove(Person person) {
-        final String key = person.getKey();
-        if (employees.get(key) == null) {
-            throw new EmployeeNotFoundException(person);
+    public void edit(Employee employee) {
+        final int id = employee.getId();
+        validateId(id);
+        Employee e = employees.get(id);
+        e.updateWith(employee);
+    }
+
+    private void validateId(int id) {
+        if (employees.get(id) == null) {
+            throw new EmployeeNotFoundException(id);
         }
-        return employees.remove(key);
     }
 
     @Override
-    public Employee find(Person person) {
-        final Employee foundEmployee = employees.get(person.getKey());
-        if (foundEmployee == null) {
-            throw new EmployeeNotFoundException(person);
-        }
-        return foundEmployee.copy();
+    public Employee remove(int id) {
+        validateId(id);
+        return employees.remove(id);
+    }
+
+
+    @Override
+    public Employee get(int id) {
+        validateId(id);
+        return employees.get(id).copy();
     }
 
     @Override
-    public List<Employee> findAll() {
+    public List<Employee> getAll() {
         return List.copyOf(employees.values());
     }
 
+
     @Override
-    public List<Employee> removeAll() {
-        List<Employee> list = List.copyOf(employees.values());
-        employees.clear();
-        return list;
+    public int size() {
+        return employees.size();
     }
 
     @Override
-    public int count() {
-        return employees.size();
+    public Collection<Employee> getEmployeesWithSalaryHigherThan(double salary) {
+        return employees.values()
+                .stream().filter((e)->e.getSalary().doubleValue()>salary)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

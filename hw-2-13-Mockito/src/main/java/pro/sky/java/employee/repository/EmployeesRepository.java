@@ -1,20 +1,20 @@
 package pro.sky.java.employee.repository;
 
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.model.Person;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeesRepository {
-    Employee add(Employee employee);
+    void add(Employee employee);
+    void edit(Employee employee);
 
-    Employee remove(Person person);
+    Employee remove(int i);
 
-    Employee find(Person person);
+    Employee get(int i);
 
-    List<Employee> findAll();
+    Collection<Employee> getAll();
 
-    List<Employee> removeAll();
+    int size();
 
-    int count();
+    Collection<Employee> getEmployeesWithSalaryHigherThan(double salary);
 }

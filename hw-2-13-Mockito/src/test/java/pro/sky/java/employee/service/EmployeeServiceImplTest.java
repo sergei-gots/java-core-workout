@@ -11,11 +11,12 @@ import pro.sky.java.employee.model.util.EmployeeValidator;
 import pro.sky.java.employee.repository.EmployeesRepositoryImpl;
 import pro.sky.java.employee.util.EmployeeConstants;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class EmployeeServiceImplTest {
 
@@ -55,29 +56,33 @@ public class EmployeeServiceImplTest {
 
     public static Stream<Arguments> addWithIncorrectSalaryTestParams() {
         return Stream.of(
-                Arguments.of(-100_000 ),
-                Arguments.of(0 ),
-                Arguments.of(99_999 ),
-                Arguments.of(55_000 ),
-                Arguments.of(95_000 )
+                Arguments.of(new BigDecimal(-100_000) ),
+                Arguments.of(new BigDecimal("0.01") ),
+                Arguments.of(new BigDecimal("99999.99") ),
+                Arguments.of(new BigDecimal(55_000) ),
+                Arguments.of(new BigDecimal(95_000) )
         );
     }
 
     @BeforeEach
     public void beforeEach() {
-        employeeService.add("John", "Johnson", 1, 100_001);
-        employeeService.add("Peter", "Peterson", 1, 120_000);
-
+        employeeService.add(List.of(
+                new Employee("John", "Johnson",
+                1, new BigDecimal(100_001)),
+                new Employee("Peter", "Peterson",
+                1, new BigDecimal(120_000))));
     }
 
     @Test
     public void addTest() {
-        Employee expected = new Employee("Andrew", "Anderson-the-Elder", 2, 130_000);
         int beforeCount = employeeService.getAll().size();
-        Employee actual =  employeeService.add("Andrew", "Anderson-the-Elder", 2, 130_000);
+        Employee employee = new Employee("Andrew", "Anderson-the-Elder",
+                2, new BigDecimal(130_000));
+        employeeService.add(employee);
+        Employee actual = employeeService.get(employee.getId());
         assertThat(actual).usingRecursiveComparison()
-                .comparingOnlyFields("firstName", "lastName", "departmentId", "salary")
-                .isEqualTo(expected)
+                .ignoringFields("id")
+                .isEqualTo(employee).ignoringFields("id")
                 .isIn(employeeService.getAll());
         assertThat(employeeService.getAll().size()).isEqualTo(beforeCount+1);
     }
@@ -86,34 +91,32 @@ public class EmployeeServiceImplTest {
     @MethodSource("addWithIncorrectFirstnameTestParams")
     public void addWithIncorrectFirstnameTest(String firstName) {
         assertThatExceptionOfType(IncorrectNameException.class)
-                .isThrownBy(()->employeeService.add(firstName, "Johnson", 1, 100_000));
+                .isThrownBy(()->employeeService.add(new Employee(firstName, "Johnson",
+                        1, new BigDecimal(100_000))));
     }
 
     @ParameterizedTest
     @MethodSource("addWithIncorrectSurnameTestParams")
     public void addWithIncorrectSurnameTest(String lastName) {
         assertThatExceptionOfType(IncorrectSurnameException.class)
-                .isThrownBy(()->employeeService.add("John",  lastName, 1, 100_000));
+                .isThrownBy(()->employeeService.add(new Employee("John",  lastName,
+                        1, new BigDecimal(100_000))));
     }
 
     @ParameterizedTest
     @MethodSource("addWithIncorrectDepartmentIdTestParams")
     public void addWithIncorrectDepartmentIdTest(int departmentId) {
         assertThatExceptionOfType(DepartmentIsNotListedException.class)
-                .isThrownBy(()->employeeService.add("John", "Johnson", departmentId, 100_000));
+                .isThrownBy(()->employeeService.add(new Employee("John", "Johnson",
+                        departmentId, new BigDecimal(100_000))));
     }
 
     @ParameterizedTest
     @MethodSource("addWithIncorrectSalaryTestParams")
-    public void addWithSalaryTest(double salary) {
+    public void addWithSalaryTest(BigDecimal salary) {
         assertThatExceptionOfType(SalaryIsTooLowException.class)
-                .isThrownBy(() -> employeeService.add("John", "Johnson", 1,  salary));
-    }
-
-    @Test
-    public void addEmployeeWhichAlreadyExistsTest() {
-        assertThatExceptionOfType(EmployeeAlreadyAddedException.class)
-                .isThrownBy(()->employeeService.add("John", "Johnson", 1, 100_001));
+                .isThrownBy(() -> employeeService.add(
+                        new Employee("John", "Johnson", 1,  salary)));
     }
 
     @Test
@@ -121,67 +124,55 @@ public class EmployeeServiceImplTest {
         //GIVEN
         char suffix = 'a';
         while(employeeService.getAll().size() < EmployeeConstants.EMPLOYEES_MAX_COUNT) {
-            employeeService.add("John", "Johnson-" + suffix, 1, 100_001);
+            employeeService.add(new Employee("John", "Johnson-" + suffix,
+                    1, new BigDecimal(100_001)));
             suffix++;
         }
         //THEN
         assertThat(employeeService.getAll().size()).isEqualTo(EmployeeConstants.EMPLOYEES_MAX_COUNT);
         assertThatExceptionOfType(EmployeeStorageIsFullException.class)
-                .isThrownBy(()->employeeService.add("John", "Johnson-the-Next", 1, 100_001));
+                .isThrownBy(()->employeeService.add(new Employee("John", "Johnson-the-Next",
+                        1, new BigDecimal(100_001))));
     }
 
     @Test
     public void removeTest() {
         //GIVEN
-        Employee expected = new Employee("John", "Johnson", 1, 100_001);
+        final int targetId = employeeService.getAll().stream().findFirst().get().getId();
+        Employee expected = employeeService.get(targetId);
+
         int beforeCount = employeeService.getAll().size();
         //WHEN
-        Employee actual = employeeService.remove("John", "Johnson");
+        Employee actual = employeeService.remove(targetId);
         //THEN
-        assertThat(actual)
-                .usingRecursiveComparison()
-                .comparingOnlyFields("firstName", "lastName", "departmentId", "salary")
-                .isEqualTo(expected)
-                .isNotIn(employeeService.getAll());
         assertThat(employeeService.getAll().size())
                 .isEqualTo(beforeCount-1);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected)
+                .isNotIn(employeeService.getAll());
+
    }
 
     @Test
     public void removeWhenEmployeeNotFoundTest() {
         //GIVEN
-        int beforeCount = employeeService.getAll().size();
+        final int beforeCount = employeeService.getAll().size();
         //THEN
         assertThatExceptionOfType(EmployeeNotFoundException.class)
-                .isThrownBy(() -> employeeService.remove("John", "Johnson-the-Younger"));
+                .isThrownBy(() -> employeeService.remove(beforeCount));
         assertThat(employeeService.getAll().size())
                 .isEqualTo(beforeCount);
     }
 
-    @Test
-    public void findTest() {
-        //GIVEN
-        Employee expected = new Employee("John", "Johnson", 1, 100_001);
-        int beforeCount = employeeService.getAll().size();
-        //WHEN
-        Employee actual = employeeService.find("John", "Johnson");
-        //THEN
-        assertThat(actual)
-                .usingRecursiveComparison()
-                .comparingOnlyFields("firstName", "lastName", "departmentId", "salary")
-                .isEqualTo(expected)
-                .isIn(employeeService.getAll());
-        assertThat(employeeService.getAll().size())
-                .isEqualTo(beforeCount);
-    }
 
     @Test
     public void findWhenEmployeeNotFoundTest() {
         //GIVEN
-        int beforeCount = employeeService.getAll().size();
+        final int beforeCount = employeeService.getAll().size();
         //THEN
         assertThatExceptionOfType(EmployeeNotFoundException.class)
-                .isThrownBy(() -> employeeService.find("John", "Johnson-the-Younger"));
+                .isThrownBy(() -> employeeService.get(beforeCount+1));
         assertThat(employeeService.getAll().size())
                 .isEqualTo(beforeCount);
     }
@@ -190,19 +181,13 @@ public class EmployeeServiceImplTest {
     public void getAllTest() {
         //THEN
         assertThat(employeeService.getAll())
-                .usingRecursiveComparison()
-                .comparingOnlyFields(
-                        "firstName," +
-                        "lastName",
-                        "departmentId",
-                        "salary")
-
-                .asList()
+                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .containsExactlyInAnyOrderElementsOf(List.of(
-                        new Employee("John", "Johnson", 1, 100_001),
-                        new Employee("Peter", "Peterson", 1, 120_000)
+                        new Employee("John", "Johnson", 1, new BigDecimal(100_001)),
+                        new Employee("Peter", "Peterson", 1, new BigDecimal(120_000))
                         )
                 );
         assertThat(employeeService.getAll().size()).isEqualTo(2);
     }
+
 }

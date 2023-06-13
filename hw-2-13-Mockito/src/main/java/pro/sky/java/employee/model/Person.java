@@ -1,15 +1,13 @@
 package pro.sky.java.employee.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Objects;
 
 
 public class Person {
     private static int nextId;
-    private final int id;
-    private final String firstName;
-    private final String lastName;
+    private int id;
+    private String firstName;
+    private String lastName;
 
     public Person(String firstName, String lastName) {
         id = ++nextId;
@@ -17,12 +15,39 @@ public class Person {
         this.lastName = lastName;
     }
 
-    @JsonIgnore
+    public Person() {
+        id = ++nextId;
+    }
+
+    protected Person(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
 
-    @JsonIgnore
+
     public String getLastName() {
         return lastName;
     }
@@ -32,12 +57,15 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return firstName.equals(person.firstName) && lastName.equals(person.lastName);
+        //return id == (person.id);
+       return firstName.equals(person.firstName) && lastName.equals(person.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+     //   return Objects.hash(id);
+       return Objects.hash(firstName, lastName);
+
     }
 
     @Override
@@ -50,9 +78,8 @@ public class Person {
         return firstName + " " + lastName;
     }
 
-    @JsonIgnore
-    public String getKey() {
-        return firstName + lastName;
+    protected void updateWith(Person person) {
+        this.firstName = person.firstName;
+        this.lastName = person.lastName;
     }
-
 }

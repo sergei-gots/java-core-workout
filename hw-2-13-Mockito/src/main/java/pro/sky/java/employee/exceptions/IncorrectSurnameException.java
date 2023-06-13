@@ -1,7 +1,7 @@
 package pro.sky.java.employee.exceptions;
 
 
-public  class IncorrectSurnameException extends IllegalArgumentException {
+public  class IncorrectSurnameException extends EmployeeException {
 
     private final String surname;
     public IncorrectSurnameException(String surname) {

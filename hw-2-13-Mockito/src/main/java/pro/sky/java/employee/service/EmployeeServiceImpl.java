@@ -2,11 +2,10 @@ package pro.sky.java.employee.service;
 
 import org.springframework.stereotype.Service;
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.model.util.EmployeeValidator;
 import pro.sky.java.employee.repository.EmployeesRepository;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -20,31 +19,42 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, int departmentId, double salary) {
-
-        final Employee employee = new Employee(
-                validator.validateName(firstName),
-                validator.validateSurname(lastName),
-                validator.validateDepartment(departmentId),
-                validator.validateSalary(salary));
-        return repository.add(employee);
+    public void add(Collection<Employee> employees) {
+        for (Employee employee : employees) {
+            add(employee);
+        }
     }
 
     @Override
-    public Employee remove(String firstName, String lastName) {
-        final Person person = new Person(validator.validateName(firstName), validator.validateSurname(lastName));
-        return repository.remove(person);
+    public void add(Employee employee) {
+        validator.validateEmployee(employee);
+        repository.add(employee);
     }
 
     @Override
-    public Employee find(String firstName, String lastName) {
-        final Person person = new Person(validator.validateName(firstName), validator.validateSurname(lastName));
-        return repository.find(person);
+    public void edit(Employee employee) {
+        validator.validateEmployee(employee);
+        repository.edit(employee);
     }
 
     @Override
-    public List<Employee> getAll() {
-        return repository.findAll();
+    public Employee remove(int id) {
+        return repository.remove(id);
+    }
+
+    @Override
+    public Employee get(int id) {
+        return repository.get(id);
+    }
+
+    @Override
+    public Collection<Employee> getAll() {
+        return repository.getAll();
+    }
+
+    @Override
+    public Collection<Employee> getEmployeesWithSalaryHigherThan(double salary) {
+        return repository.getEmployeesWithSalaryHigherThan(salary);
     }
 
 }

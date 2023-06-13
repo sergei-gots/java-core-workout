@@ -1,35 +1,52 @@
 package pro.sky.java.employee.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.java.employee.model.Employee;
-import pro.sky.java.employee.model.Person;
 import pro.sky.java.employee.service.EmployeeService;
 
+import java.util.Collection;
+
 @RestController
-@RequestMapping("/employees-book")
+@RequestMapping("/employees")
 public class EmployeeController {
 
-    final private EmployeeService employeesBookService;
+    final private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeesBookService) {
-        this.employeesBookService = employeesBookService;
+        this.employeeService = employeesBookService;
     }
 
 
-    @GetMapping("/add")
-    public Employee addEmployee(String firstName, String lastName, Integer departmentId, Double salary) {
-        return employeesBookService.add(firstName, lastName, departmentId, salary);
+    @PostMapping
+    public void addEmployee(@RequestBody Collection<Employee> employees) {
+        employeeService.add(employees);
     }
 
-    @GetMapping("/find")
-    public Employee findEmployee(String firstName, String lastName) {
-        return employeesBookService.find(firstName, lastName);
+
+    @PutMapping
+    public void editEmployee(@RequestBody Employee employee) {
+        employeeService.edit(employee);
     }
 
-    @GetMapping("/remove")
-    public Employee removeEmployee(String firstName, String lastName) {
-        return employeesBookService.remove(firstName, lastName);
+    @DeleteMapping("/{id}")
+    public Employee remove(@PathVariable int id) {
+        return employeeService.remove(id);
     }
+
+
+    @GetMapping("/{id}")
+    public Employee get(@PathVariable int id) {
+        return employeeService.get(id);
+    }
+
+    @GetMapping("/list")
+    public Collection<Employee> getAll() {
+        return employeeService.getAll();
+    }
+
+    @GetMapping("/salaryHigherThan")
+    public Collection<Employee> getEmployeesWithSalaryHigherThan(double salary) {
+        return employeeService.getEmployeesWithSalaryHigherThan(salary);
+    }
+
 }

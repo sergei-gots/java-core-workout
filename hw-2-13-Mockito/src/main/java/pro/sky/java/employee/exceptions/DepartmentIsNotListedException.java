@@ -1,9 +1,10 @@
 package pro.sky.java.employee.exceptions;
 
-public class DepartmentIsNotListedException extends IllegalArgumentException{
-    private int departmentId;
+public class DepartmentIsNotListedException extends EmployeeException {
+    private final int departmentId;
 
     public DepartmentIsNotListedException(int departmentId) {
+        super();
         this.departmentId = departmentId;
     }
 
