@@ -1,0 +1,16 @@
+###
+GET http://localhost:8080/departments/5/salary/max
+###
+GET http://localhost:8080/departments/4/salary/min
+###
+GET http://localhost:8080/departments/5/salary/sum
+###
+GET http://localhost:8080/departments/5/employees
+###
+GET http://localhost:8080/departments/all
+
+### GET
+GET http://localhost:8080/employees/15
+### DELETE
+DELETE http://localhost:8080/employees/1
+###

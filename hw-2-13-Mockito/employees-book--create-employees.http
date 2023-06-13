@@ -1,0 +1,80 @@
+### POST some employees
+POST http://localhost:8080/employees/
+Content-Type: application/json
+
+[
+  {
+    "id": 16,
+    "firstName": "Павел",
+    "lastName" : "Черенков",
+    "departmentId": 1,
+    "salary": 416000
+  },
+  {
+    "id": 9,
+    "firstName": "Аполлон",
+    "lastName" : "Майков",
+    "departmentId": 2,
+    "salary": 328000
+  },
+  {
+    "id": 10,
+    "firstName": "Афанасий",
+    "lastName" : "Никитин",
+    "departmentId": 4,
+    "salary": 368000
+  },
+  {
+    "id": 11,
+    "firstName": "Антон",
+    "lastName" : "Чехов",
+    "departmentId": 2,
+    "salary": 400000
+  },
+  {
+    "id": 12,
+    "firstName": "Михаил",
+    "lastName" : "Глинка",
+    "departmentId": 2,
+    "salary": 296000
+  },
+  {
+    "id": 13,
+    "firstName": "Иван",
+    "lastName" : "Павлов",
+    "departmentId": 4,
+    "salary": 416000
+  },
+  {
+    "id": 14,
+    "firstName": "Лев",
+    "lastName" : "Ландау",
+    "departmentId": 5,
+    "salary": 424000
+  },
+  {
+    "id": 15,
+    "firstName": "Сергей",
+    "lastName" : "Рахманинов",
+    "departmentId": 5,
+    "salary": 336000
+  }
+]
+###
+
+### POST employee 'Sergei'
+POST http://localhost:8080/employees/
+Content-Type: application/json
+
+[
+  {
+    "id"            : 0,
+    "firstName"     : "Sergei",
+    "lastName"      : "Gots",
+    "departmentId"  : 5,
+    "salary"        : 370000
+  }
+]
+
+###
+GET http://localhost:8080/employees-book/find?firstName=Афанасий&lastName=никитин
