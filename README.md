@@ -1,5 +1,5 @@
-# skypro-java-core
-Studying Java core and tests
+# java-core
+Java core and tests workout
 
 This is a multi-module project.
 There are the next separate modules (with pom.xml) in it:
